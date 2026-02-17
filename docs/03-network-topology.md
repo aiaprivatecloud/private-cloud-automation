@@ -41,3 +41,28 @@ Gateway en router mediante subinterfaces.
 
 La segmentación reduce superficie de ataque, limita movimiento lateral
 y permite aplicar reglas de firewall específicas por segmento.
+
+## 5. Inter-VLAN Routing
+
+El enrutamiento entre VLAN se realizará en el router mediante subinterfaces
+configuradas con encapsulación 802.1Q.
+
+Ejemplo conceptual:
+
+- eth0.10 -> VLAN 10 -> 192.168.10.1/24
+- eth0.20 -> VLAN 20 -> 192.168.20.1/24
+- eth0.30 -> VLAN 30 -> 192.168.30.1/24
+- eth0.40 -> VLAN 40 -> 192.168.40.1/24
+
+El puerto del switch conectado al router funcionará como trunk.
+
+Los puertos hacia dispositivos finales funcionarán como access,
+asignados a su VLAN correspondiente.
+
+## 6. Control de tráfico
+
+Se aplicarán reglas de firewall en el router para:
+
+- Bloquear tráfico directo desde VLAN Laboratorio hacia VLAN Almacenamiento.
+- Permitir únicamente puertos específicos entre VLAN Servicios y VLAN Almacenamiento.
+- Restringir acceso a VLAN Gestión a dispositivos autorizados.
