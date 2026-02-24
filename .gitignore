@@ -22,3 +22,7 @@ node_modules/
 
 # Docker
 *.pid
+
+# --- Infraestructura: no subir backups reales ---
+infra/switches/**/backups/raw/
+infra/switches/**/backups/raw/*
