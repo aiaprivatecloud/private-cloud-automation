@@ -36,3 +36,17 @@ Dado que no era posible acceder por red, se procedió a restaurar el equipo a co
 4. Verificación visual de arranque mediante LEDs frontales.
 
 Resultado: el switch volvió a la configuración por defecto del fabricante.
+
+---
+
+## 5. Acceso tras restauración
+
+Tras el reset, el equipo quedó accesible mediante:
+
+- Dirección IP por defecto: 192.168.1.1
+- Usuario por defecto: manager
+- Contraseña por defecto: friend
+
+Se accedió correctamente a la interfaz web de gestión.
+
+> Nota: Las credenciales por defecto se modificaron posteriormente por motivos de seguridad.
