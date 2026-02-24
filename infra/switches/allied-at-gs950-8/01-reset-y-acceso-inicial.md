@@ -50,3 +50,19 @@ Tras el reset, el equipo quedó accesible mediante:
 Se accedió correctamente a la interfaz web de gestión.
 
 > Nota: Las credenciales por defecto se modificaron posteriormente por motivos de seguridad.
+
+---
+
+## 6. Incidencia detectada
+
+Durante el cambio de contraseña inicial se detectó:
+
+- Error de validación con contraseñas complejas.
+- Pérdida temporal de acceso a la interfaz web.
+- Necesidad de reinicio del equipo.
+
+Posible causa: comportamiento inestable del firmware al validar ciertos formatos de contraseña.
+
+Medida adoptada:
+- Establecer contraseña válida compatible con los requisitos del firmware.
+- Guardar configuración correctamente en memoria flash.
