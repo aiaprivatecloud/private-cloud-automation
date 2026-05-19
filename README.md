@@ -121,15 +121,18 @@ Los ficheros de trabajo sensibles se excluyen mediante `.gitignore` y deben cons
 
 ## 8. Documentos de entrada recomendados
 
-Para entender el proyecto sin recorrer cada carpeta:
+Para entender el proyecto sin recorrer cada carpeta, se recomienda comenzar por los siguientes documentos:
 
-1. `docs/07-estado-real-del-proyecto.md`
-2. `docs/02-network-design.md`
-3. `docs/03-network-topology.md`
-4. `docs/08-incidencias-tecnicas.md`
-5. `docs/09-seguridad-implementada.md`
-6. `raspberry-pi/README.md`
-7. `automation/README.md`
+1. [`docs/07-estado-real-del-proyecto.md`](docs/07-estado-real-del-proyecto.md)
+2. [`docs/02-network-design.md`](docs/02-network-design.md)
+3. [`docs/03-network-topology.md`](docs/03-network-topology.md)
+4. [`docs/08-incidencias-tecnicas.md`](docs/08-incidencias-tecnicas.md)
+5. [`docs/09-seguridad-implementada.md`](docs/09-seguridad-implementada.md)
+6. [`raspberry-pi/README.md`](raspberry-pi/README.md)
+7. [`automation/README.md`](automation/README.md)
+8. [`docs/evidencias/README.md`](docs/evidencias/README.md) — Evidencias técnicas seleccionadas de implantación y validación.
+
+Para una verificación rápida del despliegue real, se recomienda consultar especialmente el [índice de evidencias técnicas seleccionadas](docs/evidencias/README.md).
 
 ## 9. Nota sobre trazabilidad
 
