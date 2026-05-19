@@ -1,0 +1,1 @@
+*/5 * * * * /opt/aia-bot/venv/bin/python /opt/aia-bot/app/test_bot.py >> /opt/aia-bot/logs/cron_test.log 2>&1

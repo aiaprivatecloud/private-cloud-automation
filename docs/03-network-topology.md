@@ -1,68 +1,80 @@
-# 03 - Topología de Red
+# 03 - Topología física y lógica final
 
-## 1. Modelo de segmentación
+## 1. Topología física de implantación
 
-Se implementará segmentación mediante VLAN en switch gestionable.
+```text
+Internet
+   |
+[Router ASUS RT-AX52 Pro]
+   |
+   | VLAN 50 / tránsito
+   |
+[Switch Allied Telesis AT-GS950/8]
+   |-- P1  -> Mac mini en0  -> OpenWRT eth0  -> WAN
+   |-- P2  -> Mac mini en8  -> OpenWRT eth1  -> Administración
+   |-- P3  -> Mac mini en9  -> OpenWRT eth2  -> Servicios
+   |-- P4  -> Mac mini en10 -> OpenWRT eth3  -> Automatización
+   |-- P5  -> NAS TerraMaster              -> VLAN 30
+   |-- P6  -> Raspberry Pi 4               -> VLAN 40
+   |-- P7  -> Portátil de administración    -> VLAN 10
+   |-- P8  -> Router principal / tránsito   -> VLAN 50
+```
 
-### VLAN propuestas
+## 2. Correspondencia final entre interfaces
 
-VLAN 10 - Gestión
-Dispositivos de administración (router, switch, hosts críticos).
+| Elemento | Interfaz | Puerto switch | VLAN | Función |
+|---|---|---:|---:|---|
+| Mac mini | `en0` | 1 | 50 | WAN / tránsito |
+| Mac mini | `en8` | 2 | 10 | Administración |
+| Mac mini | `en9` | 3 | 30 | Servicios |
+| Mac mini | `en10` | 4 | 40 | Automatización |
+| OpenWRT | `eth0` | — | 50 | WAN |
+| OpenWRT | `eth1` | — | 10 | Gateway administración |
+| OpenWRT | `eth2` | — | 30 | Gateway servicios |
+| OpenWRT | `eth3` | — | 40 | Gateway automatización |
 
-VLAN 20 - Servicios
-Host principal 24/7 y servicios internos.
+## 3. Topología lógica
 
-VLAN 30 - Almacenamiento
-NAS y sistema de copias de seguridad.
+```text
+VLAN 10 - Administración - 192.168.10.0/24
+  Gateway: 192.168.10.1
+  Elementos: portátil admin, acceso de gestión a switch y OpenWRT
 
-VLAN 40 - Laboratorio
-Entorno de pruebas y ejecución del bot.
+VLAN 20 - Usuarios - 192.168.20.0/24
+  Estado: definida para ampliación futura
 
-VLAN 50 - Invitados/IoT (opcional).
+VLAN 30 - Servicios - 192.168.30.0/24
+  Gateway: 192.168.30.1
+  Elementos: NAS
 
-## 2. Direccionamiento propuesto
+VLAN 40 - Automatización - 192.168.40.0/24
+  Gateway: 192.168.40.1
+  Elementos: Raspberry Pi, entorno de automatización
 
-VLAN 10 - 192.168.10.0/24
-VLAN 20 - 192.168.20.0/24
-VLAN 30 - 192.168.30.0/24
-VLAN 40 - 192.168.40.0/24
-VLAN 50 - 192.168.50.0/24
+VLAN 50 - WAN / tránsito - 192.168.50.0/24
+  Elementos: salida hacia router principal
+```
 
-Gateway en router mediante subinterfaces.
+## 4. Direcciones documentadas
 
-## 3. Política básica de tráfico
+| Equipo | Dirección |
+|---|---|
+| OpenWRT administración | 192.168.10.1 |
+| Switch gestionable | 192.168.10.2 |
+| Portátil de administración durante pruebas | 192.168.10.10 |
+| Raspberry Pi | 192.168.40.10 |
+| OpenWRT automatización | 192.168.40.1 |
 
-- Laboratorio -> Almacenamiento: bloqueado por defecto.
-- Servicios -> Almacenamiento: permitido solo en puertos necesarios.
-- Gestión -> todas las VLAN: acceso restringido a administradores.
-- No se expondrán servicios internos directamente a Internet.
+## 5. Ruta estática aplicada en el portátil Windows
 
-## 4. Justificación técnica
+Durante la implantación se detectó que el portátil de administración no alcanzaba correctamente la red 192.168.40.0/24. La resolución consistió en añadir una ruta persistente:
 
-La segmentación reduce superficie de ataque, limita movimiento lateral
-y permite aplicar reglas de firewall específicas por segmento.
+```powershell
+route -p add 192.168.40.0 mask 255.255.255.0 192.168.10.1
+```
 
-## 5. Inter-VLAN Routing
+Esta ruta permite enviar hacia OpenWRT el tráfico destinado a la red de automatización.
 
-El enrutamiento entre VLAN se realizará en el router mediante subinterfaces
-configuradas con encapsulación 802.1Q.
+## 6. Diferencia frente al diseño inicial
 
-Ejemplo conceptual:
-
-- eth0.10 -> VLAN 10 -> 192.168.10.1/24
-- eth0.20 -> VLAN 20 -> 192.168.20.1/24
-- eth0.30 -> VLAN 30 -> 192.168.30.1/24
-- eth0.40 -> VLAN 40 -> 192.168.40.1/24
-
-El puerto del switch conectado al router funcionará como trunk.
-
-Los puertos hacia dispositivos finales funcionarán como access,
-asignados a su VLAN correspondiente.
-
-## 6. Control de tráfico
-
-Se aplicarán reglas de firewall en el router para:
-
-- Bloquear tráfico directo desde VLAN Laboratorio hacia VLAN Almacenamiento.
-- Permitir únicamente puertos específicos entre VLAN Servicios y VLAN Almacenamiento.
-- Restringir acceso a VLAN Gestión a dispositivos autorizados.
+No existe en la solución final un enlace trunk 802.1Q único hacia OpenWRT. Ese diseño se conserva únicamente como antecedente técnico e incidencia documentada.

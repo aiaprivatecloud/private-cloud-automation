@@ -26,3 +26,14 @@ node_modules/
 # --- Infraestructura: no subir backups reales ---
 infra/switches/**/backups/raw/
 infra/switches/**/backups/raw/*
+
+# Virtual machines and disk images
+*.utm/
+*.qcow2
+*.img
+*.iso
+*.dmg
+
+# Private or non-public evidence
+docs/evidencias/privado/
+monitoring/evidencias-sai/privado/

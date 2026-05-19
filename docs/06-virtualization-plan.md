@@ -1,65 +1,72 @@
-# 06 - Plan de Virtualización
+# 06 - Virtualización en UTM
 
 ## 1. Objetivo
 
-Implementar un entorno de laboratorio aislado mediante máquina virtual
-ejecutada en el Mini (Apple Silicon M4), destinado a la ejecución del bot
-y pruebas experimentales.
+Documentar el uso de **UTM** sobre **Apple Silicon** para desplegar las máquinas virtuales que sustentan la infraestructura del proyecto.
 
-## 2. Plataforma de virtualización
+## 2. Host de virtualización
 
-Host:
-- Mac mini (Apple M4, 24 GB RAM)
-- macOS Tahoe 26.3
+- Equipo: Mac mini M4
+- Memoria: 24 GB
+- Almacenamiento interno: 512 GB SSD
+- Sistema anfitrión: macOS
 
-Hipervisor:
-- UTM (basado en QEMU)
-- Virtualización nativa ARM64
+## 3. Máquinas virtuales principales
 
-Justificación:
-- Compatibilidad total con Apple Silicon.
-- Ligero y estable.
-- Adecuado para entorno laboratorio.
-- Coherente con arquitectura ARM del host.
+### 3.1 Ubuntu Server 24.04 LTS ARM64
 
-## 3. Sistema operativo invitado
+Función:
 
-- Ubuntu Server 24.04 LTS (ARM64)
+- entorno de automatización;
+- sandbox `/opt/aia-bot`;
+- pruebas de seguridad y ejecución programada.
 
-Justificación:
-- Soporte a largo plazo.
-- Bajo consumo de recursos.
-- Entorno estándar en infraestructura real.
-- Superficie de ataque reducida frente a Desktop.
+Configuración documentada en la memoria del proyecto:
 
-## 4. Recursos asignados a la VM
+- 2 vCPU;
+- 4 GB RAM;
+- 64 GB de almacenamiento virtual;
+- red inicial compartida durante la fase preparatoria;
+- posterior integración conceptual en el entorno segmentado del proyecto.
 
-- 4 vCPU
-- 6-8 GB RAM
-- 60 GB almacenamiento
-- Red inicial: NAT (fase previa a VLAN)
+### 3.2 OpenWRT
 
-## 5. Evolución de red
+Función:
 
-Fase 1:
-- Red NAT controlada desde el host.
+- router interno;
+- puertas de enlace de las redes activas;
+- control de encaminamiento y filtrado.
 
-Fase 2 (cuando el switch esté operativo):
-- Conexión a VLAN 40 (Laboratorio).
-- Inter-VLAN routing en router.
-- Aplicación de ACL específicas.
+Configuración final de red:
 
-## 6. Medidas de seguridad iniciales
+- `eth0` WAN / tránsito;
+- `eth1` administración;
+- `eth2` servicios;
+- `eth3` automatización.
 
-- Usuario no root.
-- SSH habilitado.
-- Firewall UFW activo.
-- Actualizaciones automáticas de seguridad.
-- Snapshot base tras instalación limpia.
+## 4. Decisión relevante sobre red
 
-## 7. Gestión de riesgos
+La primera arquitectura planteó un trunk 802.1Q hacia OpenWRT mediante una única interfaz física. Tras la validación práctica, se descartó como solución final y se adoptó un modelo multi-NIC.
 
-En caso de fallo:
-- Restauración mediante snapshot.
-- Reinstalación reproducible documentada.
-- No impacto sobre NAS ni backups.
+La documentación del proyecto conserva ambas capas:
+
+- **diseño inicial**, como antecedente;
+- **implantación final**, como solución defendida.
+
+## 5. Medidas de seguridad de la VM Ubuntu
+
+- acceso administrativo por SSH con clave;
+- contraseña deshabilitada en SSH;
+- firewall UFW;
+- separación de roles mediante `aia-bot`;
+- ACL para administración controlada;
+- entorno Python aislado.
+
+## 6. Recuperación y trazabilidad
+
+La virtualización permite:
+
+- conservar snapshots;
+- documentar reconstrucción;
+- limitar impacto de errores;
+- reproducir el entorno con una guía técnica clara.

@@ -1,136 +1,79 @@
-# AT-GS950/8 — Puesta a punto e integración en la LAN
+# AT-GS950/8 — Configuración final e integración en la red segmentada
 
 ## 1. Objetivo
 
-Preparar el switch para operar como core de segmentación VLAN en la infraestructura privada, asegurando:
-- Acceso de gestión estable dentro de la LAN real.
-- Evitar conflictos con DHCP.
-- Segmentación por VLAN con puerto trunk y puertos access.
-- Configuración persistente (guardado en flash) y export de evidencias.
+Documentar la configuración final del switch Allied Telesis AT-GS950/8 como elemento central de distribución física de la red segmentada del proyecto.
 
----
+## 2. Decisión de implantación
 
-## 2. Estado de partida
+La versión inicial del diseño contempló un puerto trunk 802.1Q hacia OpenWRT. Esa solución se descartó como implantación definitiva tras las pruebas realizadas en el entorno Apple Silicon + UTM.
 
-- Acceso recuperado tras reset (ver documento 01).
-- IP por defecto del switch: 192.168.1.1 (fuera de la LAN real).
-- Router LAN actual: 192.168.<LAN>.1/24, DHCP activo.
+La configuración final utiliza **puertos de acceso untagged** asociados a una VLAN concreta y una función física clara.
 
----
+## 3. VLAN operativas
 
-## 3. Riesgo identificado
-
-Mientras el switch permanezca fuera de la subred 192.168.<LAN>.0/24:
-- La gestión depende de IP manuales y desconexión de WiFi.
-- Se complica el diagnóstico y aumenta el riesgo de pérdida de acceso.
-
----
-
-## 4. Cambio de IP de gestión
-
-Se modificó la configuración de red del switch para integrarlo en la LAN real.
-
-### Configuración aplicada
-
-- Nueva IP de gestión: 192.168.<LAN>.100
-- Máscara: /24
-- Gateway: 192.168.<LAN>.1
-
-Resultado:
-- Acceso estable desde la red 192.168.<LAN>.0/24.
-- Posibilidad de mantener WiFi activo sin pérdida de conectividad.
-- Eliminación de conflicto con red anterior (192.168.1.0/24).
-
----
-
-## 5. Ajuste del rango DHCP en el router
-
-Para evitar conflictos entre IP fija del switch y asignaciones dinámicas:
-
-- Rango DHCP anterior: 192.168.<LAN>.2 – 192.168.<LAN>.254
-- Rango DHCP actualizado: 192.168.<LAN>.103 – 192.168.<LAN>.200
-
-Objetivo:
-- Reservar el rango 192.168.<LAN>.2 – 192.168.<LAN>.102 para infraestructura con IP fija.
-- Garantizar que el switch no reciba una IP duplicada.
-
----
-
-## 6. Diseño de segmentación VLAN
-
-Se definió la siguiente estructura lógica para segmentación de red:
-
-| VLAN | Rol |
-|------|------|
-| 1 | Gestión exclusiva del switch |
+| VLAN | Función |
+|---:|---|
 | 10 | Administración |
-| 20 | Usuarios |
+| 20 | Usuarios, reservada |
 | 30 | Servicios críticos |
 | 40 | Automatización |
-| 50 | Tránsito WAN hacia router |
+| 50 | WAN / tránsito |
 
-Objetivo del diseño:
-- Separar funciones por dominio lógico.
-- Reducir superficie de ataque.
-- Permitir control granular mediante firewall en el router.
+La VLAN 1 se mantiene únicamente como elemento residual del propio switch.
 
----
+## 4. Distribución final de puertos
 
-## 7. Configuración del puerto trunk
+| Puerto | VLAN | Uso |
+|---:|---:|---|
+| 1 | 50 | Mac mini `en0` / OpenWRT WAN |
+| 2 | 10 | Mac mini `en8` / OpenWRT administración |
+| 3 | 30 | Mac mini `en9` / OpenWRT servicios |
+| 4 | 40 | Mac mini `en10` / OpenWRT automatización |
+| 5 | 30 | NAS |
+| 6 | 40 | Raspberry Pi |
+| 7 | 10 | Portátil de administración |
+| 8 | 50 | Router principal / tránsito |
 
-El puerto 1 fue configurado como enlace trunk 802.1Q hacia el router virtual (OpenWRT).
+## 5. Membresía de VLAN
 
-Configuración aplicada:
+| VLAN | Puertos untagged |
+|---:|---|
+| 10 | 2, 7 |
+| 30 | 3, 5 |
+| 40 | 4, 6 |
+| 50 | 1, 8 |
 
-- VLAN 10 → Tagged
-- VLAN 20 → Tagged
-- VLAN 30 → Tagged
-- VLAN 40 → Tagged
-- VLAN 50 → Tagged
-- VLAN 1 → Not Member
+## 6. PVID
 
-Objetivo:
-Permitir el transporte simultáneo de múltiples VLAN a través de un único enlace físico (router-on-a-stick).
+| Puerto | PVID |
+|---:|---:|
+| 1 | 50 |
+| 2 | 10 |
+| 3 | 30 |
+| 4 | 40 |
+| 5 | 30 |
+| 6 | 40 |
+| 7 | 10 |
+| 8 | 50 |
 
----
+## 7. Parámetros adicionales
 
-## 8. Configuración de puertos access
+- **Ingress Filtering**: habilitado.
+- **Acceptable Frame Types**: untagged y priority tagged en puertos de acceso.
+- **GVRP**: desactivado para evitar propagación dinámica de VLAN.
+- **Configuración persistente**: guardada en memoria flash tras los cambios relevantes.
 
-Se configuraron los puertos restantes como access, asignando:
+## 8. Justificación técnica
 
-- VLAN correspondiente en modo Untagged.
-- PVID igual al ID de VLAN asignado.
+La configuración final favorece:
 
-Medida adicional:
-- Se mantuvo un puerto dedicado en VLAN 1 como “puerto salvavidas” para gestión directa del switch en caso de error de configuración.
+- estabilidad;
+- diagnóstico sencillo;
+- coherencia entre función física y red lógica;
+- reducción de ambigüedad en la defensa del proyecto;
+- compatibilidad con la arquitectura final multi-NIC.
 
----
+## 9. Relación con la incidencia inicial
 
-## 9. Medidas básicas de estabilidad y protección
-
-Se aplicaron las siguientes medidas adicionales:
-
-### Storm Control
-- Activación de control de Broadcast.
-- Activación de control de DLF (Destination Lookup Failure).
-
-Objetivo:
-Prevenir tormentas de broadcast o tráfico anómalo que puedan degradar la red.
-
-### Spanning Tree
-- Deshabilitado en entorno actual.
-Motivo: topología simple sin enlaces redundantes.
-
----
-
-## 10. Persistencia de configuración y evidencias
-
-Tras cada modificación relevante:
-
-- Se utilizó la opción "Save Configuration to Flash".
-- Se exportó un backup de configuración.
-- El backup real se almacena fuera del repositorio (no versionado).
-- Se mantiene versión documentada anonimizada en el repo.
-
-Resultado final:
-Switch integrado en la LAN, segmentado por VLAN y preparado para integración con router virtual.
+La documentación del trunk y router-on-a-stick debe consultarse como antecedente técnico, no como configuración vigente. La solución final se describe en este documento.

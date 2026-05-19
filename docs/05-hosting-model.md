@@ -2,29 +2,46 @@
 
 ## 1. Decisión adoptada
 
-El laboratorio (VM del bot y entorno experimental)
-se ejecutará en el equipo Mac Mini dedicado 24/7.
+La infraestructura principal del proyecto se aloja en un **Mac mini M4**, que actúa como anfitrión de las máquinas virtuales y como punto central del laboratorio doméstico segmentado.
 
-## 2. Justificación técnica
+## 2. Distribución funcional
 
-- Disponibilidad continua.
-- Separación del entorno de trabajo personal.
-- Aislamiento del portátil (equipo de desarrollo).
-- Control centralizado de servicios.
-- Menor exposición de datos personales.
+| Elemento | Función |
+|---|---|
+| Mac mini M4 | Host principal de virtualización |
+| OpenWRT VM | Enrutamiento interno del laboratorio |
+| Ubuntu Server VM | Automatización básica y sandbox |
+| Switch gestionable | Separación física por puertos de acceso |
+| Raspberry Pi | Monitorización, auditoría y evidencias |
+| NAS | Almacenamiento y copias |
+| SAI | Protección frente a cortes eléctricos |
 
-## 3. Gestión de riesgos
+## 3. Razones técnicas
 
-En caso de fallo:
+- Reutilización de hardware propio.
+- Capacidad suficiente para virtualizar los servicios definidos.
+- Centralización del laboratorio.
+- Separación entre infraestructura del proyecto y equipos de uso personal.
+- Posibilidad de snapshots y recuperación.
 
-- El impacto se limita al entorno de laboratorio.
-- No afecta al NAS ni a los backups.
-- Se podrán restaurar snapshots.
-- El repositorio Git mantiene trazabilidad de configuración.
+## 4. Relación entre host y segmentación de red
 
-## 4. Medidas adicionales previstas
+El host no sustituye al switch ni a OpenWRT. Su papel es alojar las máquinas virtuales, mientras que:
 
-- Snapshots periódicos de la VM.
-- Monitorización básica (uso CPU/RAM/red).
-- Logs centralizados en nodo de auditoría (Raspberry Pi).
-- Revisión periódica de actualizaciones de seguridad.
+- el switch distribuye los enlaces físicos por segmento;
+- OpenWRT define las puertas de enlace internas;
+- el diseño final evita depender de un trunk VLAN virtualizado inestable.
+
+## 5. Riesgos y mitigaciones
+
+| Riesgo | Mitigación |
+|---|---|
+| Fallo de configuración | Documentación y rollback |
+| Error en VM | Snapshot o reconstrucción controlada |
+| Corte eléctrico | SAI y pruebas de continuidad |
+| Pérdida de acceso | Segmentación documentada y rutas verificadas |
+| Mezcla de roles | Separación entre host, router, automatización y almacenamiento |
+
+## 6. Estado final
+
+El modelo de alojamiento queda validado para el alcance del TFG: infraestructura real, segmentada y suficientemente documentada para su defensa y futura evolución.

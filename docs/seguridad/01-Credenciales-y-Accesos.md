@@ -1,35 +1,40 @@
-# 01 - Credenciales y Accesos
+# 01 - Credenciales y accesos
 
-## Objetivo
-Establecer un modelo seguro de autenticación y gestión de credenciales
-desde el inicio del proyecto.
+## 1. Objetivo
 
-## Servicios configurados
+Establecer un modelo seguro de autenticación y control de accesos para el proyecto, evitando incorporar secretos reales al repositorio.
 
-- Cuenta Google dedicada al proyecto.
-- Bitwarden (servidor EU) para gestión de contraseñas.
-- GitHub con autenticación SSH.
+## 2. Servicios y prácticas documentadas
 
-## 2FA
+- cuenta de proyecto;
+- gestor de contraseñas;
+- GitHub con autenticación SSH;
+- 2FA en servicios críticos;
+- claves de recuperación conservadas fuera del repositorio.
 
-- 2FA activado en Google.
-- 2FA activado en Bitwarden.
-- 2FA activado en GitHub.
-- Recovery keys almacenadas offline.
+## 3. Acceso GitHub por SSH
 
-## SSH GitHub
+- generación de clave Ed25519;
+- alta de clave pública;
+- verificación mediante:
 
-- Generación clave ed25519.
-- Clave pública añadida a GitHub.
-- Verificación mediante:
-  ssh -T git@github.com
+```bash
+ssh -T git@github.com
+```
 
-Resultado:
-Autenticación correcta.
+## 4. Acceso SSH a la VM
 
-## SSH VM Ubuntu
+- servidor OpenSSH instalado;
+- acceso por clave pública;
+- autenticación por contraseña deshabilitada;
+- restricción de entrada mediante UFW desde la VLAN 10.
 
-- Instalación OpenSSH Server.
-- Servicio habilitado y activo.
-- Acceso remoto validado desde portátil.
-- Snapshot base realizado tras validación.
+## 5. Principio de publicación segura
+
+El repositorio no debe contener:
+
+- contraseñas;
+- tokens;
+- claves privadas;
+- datos reales de recuperación;
+- exportaciones sensibles sin anonimizar.

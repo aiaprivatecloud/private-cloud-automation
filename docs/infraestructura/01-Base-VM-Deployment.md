@@ -1,32 +1,40 @@
-# 01 - Despliegue Base VM
+# 01 - Despliegue base de la VM Ubuntu
 
-## Objetivo
-Desplegar entorno base aislado para automatización del proyecto AIA Private Cloud.
+## 1. Objetivo
 
-## Hardware anfitrión
-Mac Mini M4 (2024)
-24GB RAM
-512GB SSD
-macOS Tahoe 26.3
+Documentar la creación inicial de la máquina virtual de automatización sobre UTM, destinada a servir como base del sandbox del proyecto.
 
-## Hipervisor
-UTM (virtualización ARM64)
+## 2. Hardware anfitrión
 
-## VM creada
-Sistema: Ubuntu Server 24.04 LTS ARM64
-CPU: 4 núcleos
-RAM: 4GB
-Disco: 64GB
-Red: Modo puente (virtio-net)
+- Mac mini M4
+- 24 GB de RAM
+- 512 GB SSD
+- macOS
 
-## Configuración realizada
-- Instalación limpia del sistema.
-- Actualización inicial del sistema.
-- Instalación y activación de OpenSSH Server.
-- Verificación de servicio SSH activo.
-- Conexión remota validada desde portátil.
+## 3. Hipervisor
 
-## Snapshot
-Se crea snapshot manual duplicando el paquete Linux.utm.
-Ubicación:
-VM-Snapshots/AIA-PrivateCloud/Linux-BASE-PostInstall.utm
+- UTM
+- Virtualización ARM64 sobre Apple Silicon
+
+## 4. VM Ubuntu Server
+
+| Parámetro | Valor documentado |
+|---|---|
+| Sistema | Ubuntu Server 24.04 LTS ARM64 |
+| CPU | 2 vCPU |
+| RAM | 4 GB |
+| Disco | 64 GB |
+| Red inicial | Shared Network durante fase preparatoria |
+
+## 5. Configuración realizada
+
+- instalación limpia;
+- actualización del sistema;
+- instalación de OpenSSH Server;
+- acceso remoto validado;
+- preparación para endurecimiento y sandbox;
+- transición posterior hacia la arquitectura segmentada del proyecto.
+
+## 6. Recuperación
+
+La VM puede recuperarse mediante snapshots o reconstruirse siguiendo los procedimientos documentados en este repositorio y en la memoria del TFG.

@@ -1,37 +1,67 @@
 # 01 - Visión global del proyecto
 
 ## 1. Propósito
-Implementar una infraestructura de nube privada orientada a la automatización del podcast y revista (AI IA HOY / HUMANIA),
-con énfasis en seguridad, segmentación de red, monitorización y automatización reproducible.
+
+El proyecto **AIA Private Cloud Automation** implanta una infraestructura privada, segura y segmentada para soportar servicios digitales y automatización básica sobre hardware propio. Su valor principal no reside en “tener muchos servicios”, sino en construir una base coherente de:
+
+- red segmentada;
+- virtualización controlada;
+- aislamiento de funciones;
+- acceso administrativo seguro;
+- trazabilidad;
+- capacidad de crecimiento sin rehacer la arquitectura.
 
 ## 2. Principios de diseño
-- Seguridad por defecto: mínimos privilegios, 2FA, secretos centralizados.
-- Segmentación: separar servicios críticos (NAS/backup) de entornos de ejecución (VM/bot).
-- Trazabilidad: todo cambio se registra en GitHub (código y documentación).
-- Reproducibilidad: configuración documentada y scripts versionados.
 
-## 3. Componentes y roles (alto nivel)
-- NAS: almacenamiento y copias de seguridad (objetivo: fuera del alcance del bot).
-- Mini / equipo principal: ejecución 24/7 (servicios, contenedores y/o VM del bot).
-- Raspberry Pi: nodo de borde/auditoría (logs, monitorización, “kill switch” si aplica).
-- Portátil: nodo de trabajo y pruebas (virtualización pesada, pruebas de modelos, laboratorio).
-- Router/Switch: segmentación (VLANs cuando llegue el switch), reglas de firewall.
+### Seguridad por defecto
+Se prioriza el mínimo privilegio, el control de accesos, el filtrado de tráfico y la reducción de exposición.
 
-## 4. Entornos
-- Producción doméstica (controlada): servicios estables (Nextcloud/almacenamiento/backup).
-- Laboratorio: pruebas de red, VM del bot, hardening, automatizaciones.
-- Acceso remoto: preferible vía VPN (no exposición directa), con 2FA.
+### Segmentación funcional
+La infraestructura se separa por funciones:
 
-## 5. Seguridad mínima aplicable desde el inicio
-- 2FA en Google/Bitwarden/GitHub.
-- Credenciales y claves API almacenadas en Bitwarden (colecciones).
-- Claves SSH para GitHub (sin contraseñas en terminal).
-- Documentación de cambios y configuración en el repositorio.
+- administración;
+- servicios críticos;
+- automatización;
+- tránsito WAN;
+- usuarios, como ampliación prevista.
 
-## 6. Entregables (evidencias)
-- Documentación técnica versionada (/docs).
-- Scripts y automatizaciones (/scripts).
-- Diseño de red y segmentación (/network).
-- Modelo de seguridad y hardening (/security).
-- Plan de backups y pruebas de restauración (/backup).
-- Monitorización y métricas (/monitoring).
+### Viabilidad real
+Las decisiones técnicas se adaptan al entorno disponible. Por ello, el modelo router-on-a-stick se documenta como diseño inicial descartado, mientras que la implantación final utiliza múltiples interfaces Ethernet físicas dedicadas.
+
+### Trazabilidad
+Las decisiones, scripts y procedimientos se documentan de forma versionada para poder justificar el proceso de diseño, implementación y corrección de incidencias.
+
+## 3. Componentes principales
+
+- **Mac mini M4**: anfitrión principal del laboratorio.
+- **UTM**: plataforma de virtualización.
+- **OpenWRT VM**: router interno y punto de encaminamiento.
+- **Ubuntu Server VM**: entorno de automatización controlado.
+- **Switch AT-GS950/8**: segmentación física por puertos de acceso.
+- **Raspberry Pi 4**: nodo de automatización, monitorización y evidencias.
+- **NAS TerraMaster**: almacenamiento en red y soporte para copias.
+- **SAI APC**: protección eléctrica y continuidad básica.
+
+## 4. Alcance funcional de la automatización
+
+La automatización incluida en esta fase es deliberadamente básica y verificable:
+
+- creación de un sandbox de servicio;
+- usuario específico `aia-bot`;
+- entorno Python aislado;
+- script de prueba con logs;
+- ejecución periódica mediante `cron`.
+
+Este enfoque demuestra que la infraestructura soporta automatización programada sin sobredimensionar el proyecto ni presentar como implantado un agente autónomo que queda fuera del alcance del TFG.
+
+## 5. Entregables técnicos
+
+- Documentación de red y direccionamiento.
+- Configuración final del switch.
+- Configuración de OpenWRT.
+- Documentación de la Raspberry Pi.
+- Sandbox de automatización.
+- Seguridad de la VM.
+- Incidencias técnicas documentadas.
+- Evidencias de validación.
+- Material de continuidad eléctrica asociado al SAI.

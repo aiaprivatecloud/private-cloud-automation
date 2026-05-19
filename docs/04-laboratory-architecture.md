@@ -1,53 +1,85 @@
-# 04 - Arquitectura del Laboratorio (Jaula de Oro)
+# 04 - Arquitectura del entorno de automatización
 
 ## 1. Objetivo
 
-Aislar el entorno de ejecución del bot y pruebas experimentales,
-limitando impacto en caso de fallo, error humano o compromiso de seguridad.
+Preparar una base segura, ordenada y reproducible para ejecutar automatizaciones simples dentro de la infraestructura privada, sin mezclar la lógica de servicio con la administración general del sistema.
 
-## 2. Capas de aislamiento
+## 2. Enfoque adoptado
 
-### 2.1 Aislamiento por virtualización
+La automatización se implementa sobre una **VM Ubuntu Server** y se estructura mediante un sandbox dedicado:
 
-El bot se ejecutará dentro de una máquina virtual dedicada.
+```text
+/opt/aia-bot
+```
 
-Características:
-- Usuario sin privilegios de administración global.
-- Recursos limitados (CPU/RAM).
-- Sin acceso directo a almacenamiento crítico.
+La elección de un directorio bajo `/opt` permite mantener la aplicación diferenciada del sistema base y del espacio personal de los usuarios.
 
-### 2.2 Aislamiento de red (VLAN 40 - Laboratorio)
+## 3. Estructura del sandbox
 
-La VM estará conectada a VLAN 40 (Laboratorio).
+```text
+/opt/aia-bot/
+├── app/
+├── venv/
+├── input/
+├── output/
+├── tmp/
+├── logs/
+└── conf/
+```
 
-- Subred: 192.168.40.0/24
-- Gateway: 192.168.40.1
-- Sin acceso directo a VLAN 30 (Almacenamiento).
+### Función de cada directorio
 
-### 2.3 Control de tráfico
+| Directorio | Uso |
+|---|---|
+| `app/` | Scripts y lógica de automatización |
+| `venv/` | Entorno virtual de Python |
+| `input/` | Datos de entrada |
+| `output/` | Resultados generados |
+| `tmp/` | Ficheros temporales |
+| `logs/` | Registros de ejecución |
+| `conf/` | Configuración del entorno |
 
-En el router:
+## 4. Usuario de servicio
 
-- Bloqueo por defecto Laboratorio -> Almacenamiento.
-- Permitir únicamente tráfico saliente necesario (DNS, HTTPS).
-- Sin exposición directa de puertos hacia el exterior.
+Se crea el usuario técnico:
 
-### 2.4 Gestión de secretos
+```bash
+aia-bot
+```
 
-- Las credenciales del bot estarán almacenadas en Bitwarden.
-- No se almacenarán claves en texto plano.
-- Tokens limitados y con rotación periódica.
+Su función es ejecutar los procesos automáticos con privilegios limitados, evitando que la automatización utilice la identidad del administrador del sistema.
 
-## 3. Relación con otros segmentos
+## 5. Separación de administración y operación
 
-- VLAN Servicios podrá comunicarse con Almacenamiento según necesidad.
-- VLAN Gestión tendrá acceso controlado a Laboratorio para administración.
-- Laboratorio no tendrá privilegios laterales.
+El sandbox mantiene como propietario a `aia-bot`, pero se conceden permisos completos al usuario administrador mediante ACL. De esta forma:
 
-## 4. Justificación técnica
+- `aia-bot` conserva la propiedad operativa del entorno;
+- `administrador` puede revisar, corregir y mantener;
+- no se abren permisos globales innecesarios.
 
-Este diseño reduce la superficie de ataque,
-limita el movimiento lateral y permite contener posibles incidentes.
+## 6. Automatización funcional implantada
 
-Se adopta un modelo de defensa en profundidad:
-virtualización + segmentación + firewall + control de credenciales.
+Se valida el funcionamiento del sandbox mediante:
+
+- script `test_bot.py`;
+- escritura en `test_bot.log`;
+- ejecución programada con `cron`;
+- salida de cron redirigida a `cron_test.log`.
+
+La tarea programada se ejecuta cada cinco minutos con la siguiente línea:
+
+```cron
+*/5 * * * * /opt/aia-bot/venv/bin/python /opt/aia-bot/app/test_bot.py >> /opt/aia-bot/logs/cron_test.log 2>&1
+```
+
+## 7. Alcance real
+
+Esta automatización demuestra que el sistema:
+
+- ejecuta scripts de forma controlada;
+- escribe registros persistentes;
+- usa un usuario de servicio;
+- separa dependencias mediante entorno virtual;
+- admite programación periódica.
+
+No se presenta como implantado un agente autónomo completo ni un flujo editorial final automatizado.
