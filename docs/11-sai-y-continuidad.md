@@ -16,29 +16,37 @@ Equipo documentado:
 El SAI refuerza dos ideas clave:
 
 - continuidad básica de la infraestructura;
-- capacidad de generar evidencias sobre comportamiento real ante incidencias.
+- capacidad de generar evidencias sobre el comportamiento real del sistema ante incidencias eléctricas.
 
-## 3. Material ya trabajado en el proyecto
+## 3. Trabajo realizado y validado
 
-En la fase final del TFG se han desarrollado pruebas y procedimientos relacionados con:
+Durante la fase final del proyecto se realizaron pruebas específicas relacionadas con:
 
-- supervisión del estado del SAI;
-- monitorización de equipos alimentados o implicados;
-- generación de registros de prueba;
-- documentación del comportamiento ante corte.
+- supervisión del estado del SAI mediante NUT;
+- detección del paso de alimentación normal a funcionamiento con batería;
+- monitorización de equipos relevantes del entorno;
+- generación de registros de prueba en formato log, CSV y eventos;
+- documentación del comportamiento observado durante un corte eléctrico breve.
 
-## 4. Estado del repositorio
+Estas pruebas no se plantearon como un sistema completo de apagado automático coordinado, sino como una validación técnica del seguimiento del SAI y de la generación de evidencias operativas.
 
-Este repositorio deja preparado el apartado documental, pero **el script definitivo de prueba del SAI y sus evidencias exactas deben incorporarse desde la versión final validada del proyecto**, para evitar subir una reconstrucción incompleta o distinta de la utilizada realmente.
+## 4. Material incorporado al repositorio
 
-Archivos previstos:
+El repositorio incluye ya los siguientes elementos asociados a esta validación:
 
-```text
-scripts/monitor_sai_equipos.sh
-monitoring/evidencias-sai/
-docs/evidencias/logs/
-```
+- script de monitorización de la prueba:
+  - `monitoring/sai/monitor_sai_equipos.sh`
+- índice de evidencias técnicas seleccionadas:
+  - `docs/evidencias/README.md`
+- capturas públicas relacionadas con el SAI:
+  - lectura inicial de valores mediante NUT;
+  - transición de estado `OL CHRG` a `OB DISCHRG`;
+  - lanzamiento del script de monitorización;
+  - registro de eventos;
+  - CSV generado durante la prueba.
 
 ## 5. Criterio de rigor
 
-Hasta que se vuelque el script exacto y la evidencia final, el repositorio no afirma una automatización cerrada de apagado controlado. Documenta la integración y reserva el espacio para la versión plenamente trazable.
+El repositorio documenta y respalda una **prueba real de monitorización del SAI y de registro de evidencias**, coherente con la memoria final del proyecto.
+
+No se afirma que exista en esta fase una automatización cerrada de apagado controlado de todos los dispositivos. Esa posibilidad queda planteada como ampliación futura, una vez definido un procedimiento completo de parada segura y validado en el entorno real.

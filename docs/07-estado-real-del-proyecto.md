@@ -28,7 +28,7 @@ Este archivo resume qué componentes están **implantados**, cuáles quedan **de
 | UFW y endurecimiento SSH en VM | Documentados e implantados según memoria |
 | ACL sobre sandbox | Implantadas |
 | SAI | Incorporado al entorno |
-| Evidencias SAI y script exacto | Pendientes de volcado completo al repositorio desde la documentación final |
+| Evidencias SAI y script de monitorización | Incorporados al repositorio en la fase final |
 
 ## 3. Criterio de coherencia
 

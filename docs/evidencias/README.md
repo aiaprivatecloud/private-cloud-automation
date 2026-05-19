@@ -36,6 +36,8 @@ Se han incluido capturas que acreditan de forma directa:
 | 15 | Script de monitorización del SAI | Ejecución en segundo plano del monitor y apertura del log de eventos | [`15-sai-monitor-script-lanzado.png`](capturas/sai/15-sai-monitor-script-lanzado.png) |
 | 16 | Registro de eventos del SAI | Cambios de estado detectados y disponibilidad de nodos supervisados | [`16-sai-registro-eventos.png`](capturas/sai/16-sai-registro-eventos.png) |
 | 17 | Evidencias CSV de la prueba SAI | Salida estructurada con estado del SAI y comprobaciones de disponibilidad | [`17-sai-csv-evidencias.png`](capturas/sai/17-sai-csv-evidencias.png) |
+| 18 | Zona de administración en OpenWRT | Forwardings permitidos desde la zona `admin` hacia automatización, servicios y WAN | [`18-openwrt-zona-admin-forwardings.png`](capturas/red/18-openwrt-zona-admin-forwardings.png) |
+| 19 | Forwardings configurados mediante UCI | Reenvíos documentados `automatizacion → wan` y `admin → automatizacion` | [`19-openwrt-forwardings-uci.png`](capturas/red/19-openwrt-forwardings-uci.png) |
 
 ## Relación con la memoria del proyecto
 

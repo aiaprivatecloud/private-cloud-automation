@@ -21,6 +21,11 @@ La separación por VLAN permite aislar funciones y reduce exposición entre rede
 
 ## 3. Cortafuegos UFW en la VM de automatización
 
+Además del cortafuegos local de la máquina virtual, el control de tráfico entre segmentos se apoya en las zonas y forwardings documentados para OpenWRT. La síntesis de estas políticas puede consultarse en:
+
+- [`infra/openwrt/02-politicas-firewall-zonas.md`](../infra/openwrt/02-politicas-firewall-zonas.md)
+
+
 Se documenta una política restrictiva:
 
 ```bash
@@ -32,9 +37,13 @@ A continuación se permite únicamente la salida necesaria:
 
 ```bash
 sudo ufw allow out to any port 53 proto udp
+sudo ufw allow out to any port 53 proto tcp
 sudo ufw allow out to any port 80 proto tcp
 sudo ufw allow out to any port 443 proto tcp
+sudo ufw allow out to any port 123 proto udp
 ```
+
+Estas excepciones permiten mantener operativa la VM sin abrir tráfico innecesario: DNS por UDP y TCP para resolución de nombres, HTTP/HTTPS para actualizaciones y consultas controladas, y NTP por UDP para conservar una hora coherente en tareas programadas y registros.
 
 Y se limita SSH entrante a la red de administración:
 
