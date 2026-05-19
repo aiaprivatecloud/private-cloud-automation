@@ -87,8 +87,6 @@ automation/            Sandbox y automatización básica
 security/              Endurecimiento y control de accesos
 raspberry-pi/          Integración de la Raspberry y SSD externo
 monitoring/            Monitorización, auditoría y continuidad
-scripts/               Scripts auxiliares pendientes de consolidación
-backups/               Espacio de trabajo para documentación de copias
 ```
 
 ## 6. Alcance y límites
