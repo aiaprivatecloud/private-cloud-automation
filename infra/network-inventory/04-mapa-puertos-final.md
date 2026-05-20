@@ -13,6 +13,15 @@
 | 7 | 10 | Access / untagged | Portátil de administración |
 | 8 | 50 | Access / untagged | Router principal / tránsito |
 
+## 1.1 Direcciones relevantes asociadas al mapa
+
+| Elemento | Puerto / relación | Dirección documentada |
+|---|---|---|
+| Switch gestionable | Gestión desde VLAN 10 | `192.168.10.2` |
+| Portátil de administración | Puerto 7 / VLAN 10 | `192.168.10.10` |
+
+Estas direcciones se incluyen aquí por su relación directa con la administración física y lógica del switch. El direccionamiento completo de interfaces y gateways se desarrolla en la documentación de topología y configuración de OpenWRT.
+
 ## 2. PVID
 
 | Puerto | PVID |

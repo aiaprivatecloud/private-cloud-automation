@@ -11,7 +11,7 @@ Este archivo resume qué componentes están **implantados**, cuáles quedan **de
 | Diseño general de la arquitectura | Completado |
 | Segmentación lógica de red | Completada |
 | VLAN 10 Administración | Implantada |
-| VLAN 20 Usuarios | Definida, no desplegada operativamente |
+| VLAN 20 Usuarios | Definida en el diseño, no desplegada operativamente en esta fase. |
 | VLAN 30 Servicios | Implantada |
 | VLAN 40 Automatización | Implantada |
 | VLAN 50 WAN / tránsito | Implantada |
@@ -36,5 +36,5 @@ El repositorio debe presentar como arquitectura final únicamente aquello que se
 
 - router-on-a-stick se mantiene como **incidencia técnica**;
 - la solución multi-NIC se presenta como **implantación definitiva**;
-- la VLAN 20 se describe como **reserva de diseño**;
+- la VLAN 20 queda definida en el diseño, pero no desplegada operativamente en esta fase;
 - el agente autónomo completo se mantiene **fuera de alcance**.

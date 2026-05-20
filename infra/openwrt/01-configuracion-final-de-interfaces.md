@@ -17,11 +17,12 @@ OpenWRT actúa como router interno de la infraestructura segmentada y como puert
 
 | Interfaz | Dirección |
 |---|---|
+| `eth0` | DHCP en la red de tránsito `192.168.50.0/24`; IP concreta variable según concesión del router principal |
 | `eth1` | 192.168.10.1/24 |
 | `eth2` | 192.168.30.1/24 |
 | `eth3` | 192.168.40.1/24 |
 
-`eth0` obtiene dirección dentro de la red de tránsito según la configuración de salida del entorno.
+`eth0` no utiliza una dirección fija documentada, ya que opera como interfaz WAN/tránsito y recibe su configuración mediante DHCP dentro de la red `192.168.50.0/24`.
 
 ## 4. Papel en la arquitectura
 

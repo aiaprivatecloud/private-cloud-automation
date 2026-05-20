@@ -33,6 +33,8 @@ Internet
 | OpenWRT | `eth2` | — | 30 | Gateway servicios |
 | OpenWRT | `eth3` | — | 40 | Gateway automatización |
 
+La interfaz `eth0` de OpenWRT actúa como enlace WAN/tránsito y obtiene su dirección mediante DHCP dentro de la red `192.168.50.0/24`, por lo que su IP concreta puede variar según la concesión del router principal.
+
 ## 3. Topología lógica
 
 ```text

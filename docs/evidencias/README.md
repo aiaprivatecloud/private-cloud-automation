@@ -38,6 +38,8 @@ Se han incluido capturas que acreditan de forma directa:
 | 17 | Evidencias CSV de la prueba SAI | Salida estructurada con estado del SAI y comprobaciones de disponibilidad | [`17-sai-csv-evidencias.png`](capturas/sai/17-sai-csv-evidencias.png) |
 | 18 | Zona de administración en OpenWRT | Forwardings permitidos desde la zona `admin` hacia automatización, servicios y WAN | [`18-openwrt-zona-admin-forwardings.png`](capturas/red/18-openwrt-zona-admin-forwardings.png) |
 | 19 | Forwardings configurados mediante UCI | Reenvíos documentados `automatizacion → wan` y `admin → automatizacion` | [`19-openwrt-forwardings-uci.png`](capturas/red/19-openwrt-forwardings-uci.png) |
+| 20 | ACL del sandbox de automatización | Verificación de permisos específicos para `administrador` sobre `/opt/aia-bot` mediante `getfacl` | [`20-acl-sandbox-getfacl.png`](capturas/seguridad/20-acl-sandbox-getfacl.png) |
+| 21 | Raspberry Pi integrada en VLAN 40 | Dirección `192.168.40.10/24`, ruta por defecto vía `192.168.40.1` y servicio SSH activo | [`21-raspberry-ip-rutas-ssh-activo.png`](capturas/raspberry/21-raspberry-ip-rutas-ssh-activo.png) |
 
 ## Relación con la memoria del proyecto
 

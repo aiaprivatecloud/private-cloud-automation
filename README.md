@@ -29,7 +29,7 @@ La solución final implementada utiliza **múltiples interfaces Ethernet física
 | VLAN | Función | Red | Estado |
 |---:|---|---|---|
 | 10 | Administración | 192.168.10.0/24 | Implantada |
-| 20 | Usuarios | 192.168.20.0/24 | Definida, reservada para ampliación |
+| 20 | Usuarios | 192.168.20.0/24 | Definida en el diseño, no desplegada operativamente en esta fase. |
 | 30 | Servicios críticos | 192.168.30.0/24 | Implantada |
 | 40 | Automatización | 192.168.40.0/24 | Implantada |
 | 50 | WAN / tránsito | 192.168.50.0/24 | Implantada |
