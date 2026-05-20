@@ -20,6 +20,10 @@ La solución se apoya en:
 
 Este repositorio no pretende duplicar la memoria del TFG, sino conservar una **base técnica versionada, reproducible y defendible** de las decisiones, configuraciones, pruebas y materiales asociados al proyecto.
 
+## Verificación rápida
+
+Para comprobar de forma directa la implantación real del proyecto, puede consultarse el [índice de 21 evidencias técnicas seleccionadas](docs/evidencias/README.md), con capturas de red, automatización, seguridad, Raspberry Pi y SAI.
+
 ## 2. Estado real del proyecto
 
 La arquitectura final **no utiliza router-on-a-stick** como implantación definitiva. Ese modelo fue diseñado y validado conceptualmente, pero se descartó tras comprobar una limitación práctica en el paso estable de tráfico VLAN etiquetado hacia la VM de OpenWRT en el entorno **Apple Silicon + UTM**.
