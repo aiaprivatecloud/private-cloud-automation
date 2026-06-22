@@ -1,0 +1,11 @@
+.humania-ai-news-admin {
+	max-width: 960px;
+}
+
+.humania-ai-news-card {
+	margin-top: 1rem;
+	padding: 1rem;
+	background: #ffffff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+}
