@@ -64,6 +64,7 @@ HUMANía, la IA en castellano.
 - docs/despliegue/instalacion-tema-plugin.md
 - docs/despliegue/checklist-staging-produccion.md
 - docs/despliegue/backups-rollback.md
+- docs/despliegue/empaquetado-validacion.md
 
 ## Tema propio
 

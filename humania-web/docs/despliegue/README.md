@@ -12,6 +12,7 @@ Definir un flujo seguro y ordenado para llevar el tema propio y el plugin propio
 - instalacion-tema-plugin.md
 - checklist-staging-produccion.md
 - backups-rollback.md
+- empaquetado-validacion.md
 
 ## Principios
 
