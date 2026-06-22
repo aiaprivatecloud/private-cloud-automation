@@ -42,6 +42,7 @@ HUMANía, la IA en castellano.
 - docs/arquitectura
 - docs/automatizacion
 - docs/seguridad
+- docs/despliegue
 - assets/logo
 - assets/colors
 - assets/images
@@ -54,8 +55,46 @@ HUMANía, la IA en castellano.
 - docs/branding/logo.md
 - docs/accesibilidad/checklist-accesibilidad.md
 - docs/arquitectura/estructura-web.md
+- docs/automatizacion/noticias-ia.md
 - docs/seguridad/README.md
 - docs/seguridad/seguridad-base.md
+- docs/seguridad/desarrollo-seguro-tema-plugin.md
+- docs/despliegue/README.md
+- docs/despliegue/entornos.md
+- docs/despliegue/instalacion-tema-plugin.md
+- docs/despliegue/checklist-staging-produccion.md
+- docs/despliegue/backups-rollback.md
+
+## Tema propio
+
+El tema propio se encuentra en:
+
+- theme/humania-theme
+
+Estado actual:
+
+- esqueleto inicial creado
+- estructura base WordPress
+- CSS inicial mobile-first
+- JavaScript mínimo
+- soporte de menús
+- soporte de imágenes destacadas
+
+## Plugin propio
+
+El plugin propio se encuentra en:
+
+- plugins/humania-ai-news
+
+Estado actual:
+
+- esqueleto inicial creado
+- estructura modular
+- panel de administración inicial
+- página futura de revisión
+- sin captura real de noticias
+- sin publicación automática
+- sin llamadas externas
 
 ## Seguridad
 
@@ -75,6 +114,20 @@ HUMANía Web usará tema propio y plugin propio, por lo que el desarrollo debe s
 
 La automatización editorial no debe publicar directamente en sus primeras fases. El sistema debe crear borradores revisables.
 
+## Despliegue
+
+El despliegue debe realizarse con un flujo controlado:
+
+1. Desarrollo en rama.
+2. Pull Request.
+3. Merge a main.
+4. Prueba en staging.
+5. Backup.
+6. Despliegue en producción.
+7. Comprobación posterior.
+
+No se deben probar cambios nuevos directamente en producción.
+
 ## Estado del proyecto
 
-Fase inicial: definición de estructura, branding, accesibilidad, arquitectura y seguridad base.
+Fase inicial avanzada: documentación base, branding, accesibilidad, arquitectura, seguridad, despliegue, tema inicial y plugin inicial.
