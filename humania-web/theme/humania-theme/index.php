@@ -1,8 +1,8 @@
 <?php
 /**
- * Plantilla principal del tema HUMANia.
+ * Plantilla principal del tema HUMANía.
  *
- * @package HUMANia
+ * @package HUMANía
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +14,7 @@ get_header();
 
 <main id="main-content" class="site-main">
 	<section class="hero">
-		<p class="hero__eyebrow"><?php esc_html_e( 'HUMANia', 'humania' ); ?></p>
+		<p class="hero__eyebrow"><?php esc_html_e( 'HUMANía', 'humania' ); ?></p>
 		<h1 class="hero__title"><?php esc_html_e( 'La IA en castellano', 'humania' ); ?></h1>
 		<p class="hero__text">
 			<?php esc_html_e( 'Una web editorial sobre inteligencia artificial, tecnología y mirada humana.', 'humania' ); ?>

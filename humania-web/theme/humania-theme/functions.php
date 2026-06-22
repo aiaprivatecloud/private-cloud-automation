@@ -1,8 +1,8 @@
 <?php
 /**
- * Funciones principales del tema HUMANia.
+ * Funciones principales del tema HUMANía.
  *
- * @package HUMANia
+ * @package HUMANía
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

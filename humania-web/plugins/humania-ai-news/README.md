@@ -1,6 +1,6 @@
-# HUMANia AI News
+# HUMANía AI News
 
-Plugin propio de HUMANia Web para automatizacion controlada de noticias de inteligencia artificial.
+Plugin propio de HUMANía Web para automatizacion controlada de noticias de inteligencia artificial.
 
 ## Objetivo
 

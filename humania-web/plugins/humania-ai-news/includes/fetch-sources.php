@@ -2,7 +2,7 @@
 /**
  * Captura futura de fuentes.
  *
- * @package HUMANia_AI_News
+ * @package HUMANía_AI_News
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -1,8 +1,8 @@
 <?php
 /**
- * Funciones de seguridad del plugin HUMANia AI News.
+ * Funciones de seguridad del plugin HUMANía AI News.
  *
- * @package HUMANia_AI_News
+ * @package HUMANía_AI_News
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

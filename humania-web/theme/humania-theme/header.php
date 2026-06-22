@@ -1,8 +1,8 @@
 <?php
 /**
- * Cabecera del tema HUMANia.
+ * Cabecera del tema HUMANía.
  *
- * @package HUMANia
+ * @package HUMANía
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
