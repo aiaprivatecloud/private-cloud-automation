@@ -1,6 +1,6 @@
-# HUMANia Theme
+# HUMANía Theme
 
-Tema propio de HUMANia Web.
+Tema propio de HUMANía Web.
 
 ## Objetivo
 

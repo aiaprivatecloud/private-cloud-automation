@@ -2,7 +2,7 @@
 /**
  * Pagina de ajustes del plugin.
  *
- * @package HUMANia_AI_News
+ * @package HUMANía_AI_News
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +18,7 @@ function humania_ai_news_render_settings_page() {
 	}
 	?>
 	<div class="wrap humania-ai-news-admin">
-		<h1><?php esc_html_e( 'HUMANia AI News', 'humania-ai-news' ); ?></h1>
+		<h1><?php esc_html_e( 'HUMANía AI News', 'humania-ai-news' ); ?></h1>
 
 		<p>
 			<?php esc_html_e( 'Plugin propio para automatizacion controlada de noticias de inteligencia artificial.', 'humania-ai-news' ); ?>

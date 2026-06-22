@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: HUMANia AI News
+ * Plugin Name: HUMANía AI News
  * Plugin URI: https://aiaprendi.com/
- * Description: Plugin propio para automatizacion controlada de noticias de inteligencia artificial en HUMANia Web.
+ * Description: Plugin propio para automatizacion controlada de noticias de inteligencia artificial en HUMANía Web.
  * Version: 0.1.0
- * Author: HUMANia
+ * Author: HUMANía
  * Text Domain: humania-ai-news
  *
- * @package HUMANia_AI_News
+ * @package HUMANía_AI_News
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,8 +51,8 @@ register_deactivation_hook( __FILE__, 'humania_ai_news_deactivate' );
  */
 function humania_ai_news_register_admin_menu() {
 	add_menu_page(
-		__( 'HUMANia AI News', 'humania-ai-news' ),
-		__( 'HUMANia IA', 'humania-ai-news' ),
+		__( 'HUMANía AI News', 'humania-ai-news' ),
+		__( 'HUMANía IA', 'humania-ai-news' ),
 		'manage_options',
 		'humania-ai-news',
 		'humania_ai_news_render_settings_page',

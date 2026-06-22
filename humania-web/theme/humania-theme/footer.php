@@ -1,8 +1,8 @@
 <?php
 /**
- * Pie de pagina del tema HUMANia.
+ * Pie de pagina del tema HUMANía.
  *
- * @package HUMANia
+ * @package HUMANía
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
