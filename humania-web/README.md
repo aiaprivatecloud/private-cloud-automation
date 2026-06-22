@@ -43,6 +43,7 @@ HUMANía, la IA en castellano.
 - docs/automatizacion
 - docs/seguridad
 - docs/despliegue
+- docs/auditoria
 - assets/logo
 - assets/colors
 - assets/images
@@ -60,11 +61,22 @@ HUMANía, la IA en castellano.
 - docs/seguridad/seguridad-base.md
 - docs/seguridad/desarrollo-seguro-tema-plugin.md
 - docs/despliegue/README.md
+- docs/auditoria
 - docs/despliegue/entornos.md
+- docs/auditoria
 - docs/despliegue/instalacion-tema-plugin.md
+- docs/auditoria
 - docs/despliegue/checklist-staging-produccion.md
+- docs/auditoria
 - docs/despliegue/backups-rollback.md
+- docs/auditoria
 - docs/despliegue/empaquetado-validacion.md
+- docs/auditoria/README.md
+- docs/auditoria/plugins-actuales.md
+- docs/auditoria/contenido-actual.md
+- docs/auditoria/suscriptores-newsletter.md
+- docs/auditoria/plan-migracion.md
+- docs/auditoria
 
 ## Tema propio
 
