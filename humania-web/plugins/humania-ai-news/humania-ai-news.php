@@ -24,6 +24,7 @@ $humania_ai_news_includes = [
     'includes/classify.php',
     'includes/summarize.php',
     'includes/create-draft.php',
+    'includes/player-shortcode.php',
     'admin/settings-page.php',
     'admin/review-page.php',
 ];
@@ -207,3 +208,31 @@ function humania_ai_news_enqueue_admin_assets(string $hook): void
     );
 }
 add_action('admin_enqueue_scripts', 'humania_ai_news_enqueue_admin_assets');
+
+/**
+ * Carga estilos del reproductor solo cuando una entrada o página usa el shortcode.
+ */
+function humania_ai_news_enqueue_player_assets(): void
+{
+    if (!is_singular()) {
+        return;
+    }
+
+    global $post;
+
+    if (!$post instanceof WP_Post) {
+        return;
+    }
+
+    if (!has_shortcode($post->post_content, 'humania_player')) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'humania-ai-news-player',
+        HUMANIA_AI_NEWS_URL . 'assets/css/player.css',
+        [],
+        HUMANIA_AI_NEWS_VERSION
+    );
+}
+add_action('wp_enqueue_scripts', 'humania_ai_news_enqueue_player_assets');
