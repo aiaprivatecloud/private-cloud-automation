@@ -16,11 +16,69 @@ La web actual contiene:
 - 421 comentarios
 - 2 usuarios
 - 16 plugins detectados
+- 3 formularios WPForms detectados
 - dependencia fuerte de Elementor
 - páginas legales gestionadas por Complianz
-- formularios gestionados probablemente con WPForms
+- formularios gestionados con WPForms
 - envío de correo gestionado con WP Mail SMTP
 - caché gestionada con LiteSpeed Cache
+- optimización de imágenes con ShortPixel
+
+## Diagnóstico añadido de formularios, correo y legal
+
+### Formularios
+
+Se detectan formularios en WPForms:
+
+- Hestia
+- Newsletter Signup Form
+- AI Aprendí contacta
+
+El formulario `Newsletter Signup Form` no confirma por sí solo la existencia de una newsletter real.
+
+No se detecta sistema claro de:
+
+- lista de suscriptores
+- campañas
+- bajas
+- consentimiento específico de newsletter
+- doble confirmación
+
+### Correo
+
+WP Mail SMTP está configurado con:
+
+- Google / Gmail
+- OAuth conectado
+- correo remitente actual: eiaihoy@gmail.com
+- nombre remitente actual: AI Aprendí
+- sin conexión de respaldo
+
+Debe revisarse durante la migración de marca para cambiar la identidad de correo a HUMANía.
+
+### Legal y cookies
+
+Complianz está activo, pero incompleto.
+
+Estado detectado:
+
+- gestión de consentimientos activa
+- progreso aproximado: 25%
+- 6 tareas abiertas
+- términos y condiciones validados
+- aviso sobre custom post types no cubiertos por el escaneo gratuito
+
+Debe completarse antes de producción.
+
+### Lean Player
+
+Lean Player está activo, pero la revisión indica que los elementos exportados parecen demos.
+
+Decisión:
+
+- revisar en staging
+- comprobar uso real en páginas públicas
+- eliminar si no se usa
 
 ## Principio central
 
@@ -37,7 +95,7 @@ La migración se hará por fases:
 
 ## Fase 1: auditoría de la web actual
 
-Estado: iniciada.
+Estado: avanzada.
 
 Tareas:
 
@@ -51,6 +109,8 @@ Tareas:
 - revisar medios
 - revisar páginas legales
 - revisar posible sistema de suscriptores
+- revisar correo saliente
+- revisar reproductores Lean Player
 
 Documentos relacionados:
 
@@ -78,6 +138,9 @@ Tareas:
 - comprobar páginas
 - comprobar entradas
 - comprobar medios
+- comprobar formularios
+- comprobar envío de correo
+- comprobar cookies y banner legal
 - comprobar administración
 - comprobar menú del plugin
 - confirmar que el plugin no captura ni publica noticias
@@ -108,6 +171,8 @@ Plantillas necesarias:
 - plantilla para podcast
 - plantilla para noticias IA
 - plantilla para archivo temático
+- plantilla para contacto
+- plantilla para página legal simple
 
 Prioridad inicial:
 
@@ -142,6 +207,8 @@ Tareas:
 - revisar SEO
 - revisar metadatos
 - revisar comentarios
+- revisar formularios embebidos
+- revisar shortcodes
 
 ## Fase 5: limpieza de taxonomías
 
@@ -179,8 +246,8 @@ Orden recomendado:
 1. hCaptcha, si no se usa.
 2. Plantillas de inicio, si no se usa.
 3. Plantillas de inicio de Kadence WP, si no se usa.
-4. WP Popular Posts, si se puede sustituir.
-5. Lean Player, si solo contiene demos.
+4. Lean Player, si solo contiene demos.
+5. WP Popular Posts, si se puede sustituir.
 6. PRO Elements, cuando no haya dependencia.
 7. Ultimate Addons for Elementor, cuando no haya dependencia.
 8. Elementor, solo al final.
@@ -229,6 +296,15 @@ Objetivo:
 
 Diseñar una newsletter de HUMANía con consentimiento claro.
 
+Diagnóstico actual:
+
+- existe un formulario llamado `Newsletter Signup Form`
+- no se detecta newsletter real
+- no se detecta lista clara de suscriptores
+- no se detecta sistema de campañas
+- WP Mail SMTP no es una newsletter
+- Gmail puede servir para bajo volumen, pero no para envío masivo
+
 Tareas:
 
 - revisar formularios actuales
@@ -239,12 +315,32 @@ Tareas:
 - crear formulario de suscripción
 - añadir baja sencilla
 - probar entregabilidad
+- cambiar remitente de AI Aprendí a HUMANía
 
 Regla:
 
 No usar emails de comentarios como suscriptores.
 
-## Fase 9: producción
+## Fase 9: legal y privacidad
+
+Estado: pendiente.
+
+Objetivo:
+
+Completar Complianz y asegurar que la web nueva conserva cumplimiento legal básico.
+
+Tareas:
+
+- completar asistente de Complianz
+- revisar tareas abiertas
+- revisar banner de cookies
+- revisar política de cookies
+- revisar términos y condiciones
+- revisar si falta política de privacidad
+- revisar custom post types futuros
+- adaptar textos a HUMANía
+
+## Fase 10: producción
 
 Estado: pendiente.
 
@@ -257,6 +353,7 @@ Condiciones para producción:
 - plan de rollback
 - páginas principales revisadas
 - formularios revisados
+- correo saliente probado
 - SEO revisado
 - cookies revisadas
 - usuarios revisados
@@ -270,7 +367,9 @@ Condiciones para producción:
 - comprobar entradas
 - comprobar páginas
 - comprobar contacto
+- comprobar formulario newsletter si existe
 - comprobar legal
+- comprobar cookies
 - comprobar menú
 - comprobar móvil
 - comprobar accesibilidad básica
@@ -294,6 +393,14 @@ Si falla el plugin:
 3. Corregir en staging.
 4. No activar automatización hasta resolver.
 
+Si falla un formulario:
+
+1. Volver al formulario anterior.
+2. Revisar WPForms.
+3. Revisar WP Mail SMTP.
+4. Probar envío.
+5. No tocar producción sin prueba.
+
 ## Decisión actual
 
 No instalar nada en producción.
@@ -302,9 +409,10 @@ Siguiente paso:
 
 - completar auditoría documental
 - subir auditoría al repositorio
-- revisar formularios de WPForms
-- revisar ajustes de WP Mail SMTP
-- revisar uso real de Lean Player
+- revisar ubicación pública de formularios
+- revisar configuración completa de WPForms
+- revisar uso real de Lean Player en staging
+- completar Complianz
 - preparar prueba controlada en staging
 
 ## Resumen
