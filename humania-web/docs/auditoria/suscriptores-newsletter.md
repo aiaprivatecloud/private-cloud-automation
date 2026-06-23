@@ -1,6 +1,6 @@
 # Suscriptores y newsletter — HUMANía Web
 
-Este documento recoge el análisis inicial de usuarios, posibles suscriptores y futura newsletter de HUMANía Web.
+Este documento recoge el análisis inicial de usuarios, formularios, posibles suscriptores y futura newsletter de HUMANía Web.
 
 ## Objetivo
 
@@ -8,7 +8,7 @@ Identificar dónde están almacenados los posibles suscriptores actuales, qué c
 
 ## Datos actuales conocidos
 
-A partir del panel de WordPress y de la exportación XML completa se detecta:
+A partir del panel de WordPress, de la exportación XML completa y de la revisión de WPForms/WP Mail SMTP se detecta:
 
 | Elemento | Cantidad / Estado |
 |---|---|
@@ -16,9 +16,12 @@ A partir del panel de WordPress y de la exportación XML completa se detecta:
 | Comentarios | 421 |
 | Plugin específico de newsletter | No detectado |
 | Plugin de formularios | WPForms Lite |
+| Formularios WPForms detectados | 3 |
 | Plugin de envío de correo | WP Mail SMTP |
+| Servicio de correo configurado | Google / Gmail OAuth |
 | Plugin legal/cookies | Complianz |
 | Sistema claro de newsletter | No confirmado |
+| Envíos guardados visibles | 0 en formularios revisados |
 
 ## Usuarios actuales
 
@@ -45,6 +48,42 @@ Usuarios detectados en WordPress:
 - No usar cuenta administradora para tareas editoriales ordinarias si se puede evitar.
 - Revisar que no existan usuarios antiguos o innecesarios.
 
+## Formularios WPForms detectados
+
+| Formulario | Shortcode | Función aparente | Envíos visibles |
+|---|---|---|---:|
+| Hestia | [wpforms id="1114"] | Contacto genérico / plantilla previa | 0 |
+| Newsletter Signup Form | [wpforms id="859"] | Captación básica de nombre y email | 0 |
+| AI Aprendí contacta | Pendiente de confirmar | Contacto principal | Pendiente |
+
+## Campos observados
+
+Campos detectados en los formularios:
+
+- nombre
+- apellidos
+- email
+- asunto
+- mensaje
+- campo “Cuéntame”
+- reCAPTCHA activo
+
+## Diagnóstico de WPForms
+
+WPForms está instalado y contiene formularios útiles, pero no se detecta una newsletter real.
+
+El formulario llamado `Newsletter Signup Form` solo confirma que existe una captación básica de nombre y email.
+
+No se ha visto:
+
+- checkbox de consentimiento específico
+- texto legal claro
+- sistema de doble confirmación
+- lista de suscriptores
+- campañas de newsletter
+- sistema de baja
+- integración clara con servicio externo
+
 ## Newsletter actual
 
 No se detecta todavía un sistema claro de newsletter.
@@ -70,19 +109,34 @@ WPForms Lite puede usarse para formularios de contacto o captación.
 
 Pendiente revisar:
 
-- formularios existentes
-- campos recogidos
-- finalidad de cada formulario
-- si existe checkbox de consentimiento
-- si existe aviso legal
-- si recoge emails para contacto o suscripción
-- si almacena entradas en WordPress o solo envía correo
+- ubicación real de cada formulario
+- qué formulario aparece en la web pública
+- si WPForms almacena entradas o solo envía emails
+- destinatario de cada formulario
+- asunto de los correos enviados
+- mensajes de confirmación
+- avisos legales
+- checkbox de consentimiento
+- integración con reCAPTCHA
 
 ## WP Mail SMTP
 
-WP Mail SMTP no es un sistema de newsletter.
+WP Mail SMTP está configurado.
 
-Su función es mejorar la entrega de correos enviados por WordPress.
+Datos detectados:
+
+| Ajuste | Valor |
+|---|---|
+| Versión | Lite |
+| Correo remitente | eiaihoy@gmail.com |
+| Nombre remitente | AI Aprendí |
+| Servicio | Google / Gmail |
+| Autorización | OAuth conectado |
+| Conexión de respaldo | Ninguna |
+
+## Diagnóstico de WP Mail SMTP
+
+WP Mail SMTP sirve para asegurar el envío de correos desde WordPress.
 
 Puede ser útil para:
 
@@ -98,6 +152,23 @@ Pero no gestiona por sí solo:
 - bajas
 - consentimiento
 - segmentación
+- analítica de newsletter
+
+## Cambios futuros recomendados en correo
+
+Para HUMANía conviene revisar:
+
+- cambiar nombre remitente de `AI Aprendí` a `HUMANía`
+- valorar correo propio del dominio
+- mantener Gmail solo para bajo volumen
+- usar un servicio especializado si se activa newsletter real
+- añadir conexión de respaldo si la web depende de formularios críticos
+
+Posibles correos futuros:
+
+- contacto@dominio
+- hola@dominio
+- newsletter@dominio
 
 ## Comentarios
 
@@ -127,6 +198,8 @@ Debe incluir:
 - registro de origen del consentimiento
 - sistema sencillo de baja
 - identificación clara del remitente
+- prueba de envío
+- entregabilidad controlada
 
 ## Opciones futuras
 
@@ -215,6 +288,8 @@ Antes hay que:
 | Duplicar listas | Centralizar sistema |
 | Perder consentimiento | Registrar origen y fecha |
 | Exponer emails | Minimizar datos y proteger accesos |
+| Formularios sin checkbox legal | Añadir consentimiento claro |
+| Gmail como sistema de envíos masivos | Usar solo bajo volumen o servicio especializado |
 
 ## Relación con el plugin HUMANía AI News
 
@@ -232,12 +307,13 @@ La newsletter podría integrarse en una fase posterior, pero como módulo separa
 
 ## Pendiente
 
-- revisar formularios de WPForms
-- revisar si WPForms almacena entradas
-- revisar textos de consentimiento
-- revisar si hay casillas de aceptación
-- revisar configuración de WP Mail SMTP
+- revisar ubicación real de los formularios en la web pública
+- revisar destinatarios de cada formulario
+- revisar mensajes de confirmación
+- revisar si WPForms Lite almacena o solo envía
 - revisar política de privacidad actual
+- revisar configuración completa de WP Mail SMTP
 - decidir herramienta de newsletter
 - definir estrategia de suscripción
 - definir estrategia de baja
+- cambiar identidad de correo a HUMANía cuando se migre la marca

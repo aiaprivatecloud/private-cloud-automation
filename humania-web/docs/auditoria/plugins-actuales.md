@@ -14,7 +14,9 @@ Saber qué plugins existen, para qué sirven y qué decisión inicial se toma so
 | Plugins activos | 15 |
 | Plugins inactivos | 1 |
 | Dependencia fuerte detectada | Elementor |
-| Plugins candidatos a eliminación futura | 4 |
+| Formularios detectados | 3 |
+| Sistema claro de newsletter | No confirmado |
+| Plugins candidatos a eliminación futura | 5 |
 | Plugins a mantener inicialmente | 10 |
 | Plugins a vigilar especialmente | 2 |
 
@@ -24,10 +26,10 @@ Saber qué plugins existen, para qué sirven y qué decisión inicial se toma so
 |---|---|---|---|---|
 | All in One SEO | Activo | SEO, mapas del sitio, metadatos | Sí | Mantener por ahora |
 | Complianz - Terms and Conditions | Activo | Términos y condiciones | Sí | Mantener por ahora |
-| Complianz GDPR/CCPA Cookie Consent | Activo | Cookies, RGPD, privacidad | Sí | Mantener por ahora |
+| Complianz GDPR/CCPA Cookie Consent | Activo | Cookies, RGPD, privacidad | Sí | Mantener y completar configuración |
 | Elementor | Activo | Maquetador visual | Sí | Mantener hasta reconstruir diseño |
-| hCaptcha for WP | Inactivo | Antispam / captcha | No | Revisar y borrar si no se usa |
-| Lean Player | Activo | Reproductor audio/vídeo | Dudoso | Revisar uso real |
+| hCaptcha for WP | Inactivo | Antispam / captcha | No | Borrar en staging si no se usa |
+| Lean Player | Activo | Reproductor audio/vídeo | Dudoso | Candidato a eliminar si solo contiene demos |
 | LiteSpeed Cache | Activo | Caché y rendimiento | Sí | Mantener |
 | Plantillas de inicio | Activo | Importador de plantillas | No | Candidato a eliminar |
 | Plantillas de inicio de Kadence WP | Activo | Importador de plantillas | No | Candidato a eliminar |
@@ -78,6 +80,18 @@ Motivo:
 
 ## Plugins candidatos a eliminación futura
 
+### hCaptcha for WP
+
+Está inactivo.
+
+Además, los formularios revisados muestran reCAPTCHA activo, no hCaptcha.
+
+Decisión inicial:
+
+- revisar en staging
+- borrar si no se usa
+- no mantener plugins inactivos sin motivo
+
 ### Plantillas de inicio
 
 Probablemente se utilizó para importar diseños.
@@ -100,15 +114,26 @@ Decisión inicial:
 - comprobar dependencia real
 - eliminar si no se usa
 
-### hCaptcha for WP
+### Lean Player
 
-Está inactivo.
+La configuración de Lean Player está presente, pero la exportación revisada muestra elementos demo.
+
+Elementos detectados:
+
+- Demo: YouTube Video Player
+- Demo: Vimeo Video Player
+- Demo: HTML5 Video Player
+- Demo: YouTube Video Player - Auto Play
+- Demo: Audio / Podcast Player - Speed 1.25
+
+No se ha confirmado uso real en páginas o entradas.
 
 Decisión inicial:
 
-- revisar si algún formulario lo necesita
-- borrar si no se usa
-- no mantener plugins inactivos sin motivo
+- revisar en staging
+- comprobar si hay shortcodes activos
+- comprobar si alguna página pública lo usa
+- eliminar si solo contiene demos
 
 ### WP Popular Posts
 
@@ -156,10 +181,19 @@ Plugins:
 - Complianz - Terms and Conditions
 - Complianz GDPR/CCPA Cookie Consent
 
+Estado detectado:
+
+- gestión de consentimientos activada
+- progreso aproximado: 25%
+- 6 tareas abiertas
+- términos y condiciones validados
+- aviso sobre custom post types no cubiertos por el escaneo gratuito
+
 Decisión inicial:
 
 - mantener
-- revisar configuración
+- revisar asistente
+- completar tareas abiertas
 - conservar páginas legales existentes
 - comprobar que la nueva web respeta cookies y privacidad
 - no sustituir hasta tener alternativa legal clara
@@ -186,6 +220,13 @@ Plugins:
 - WP Mail SMTP
 - WPForms Lite
 
+Estado detectado:
+
+- WPForms Lite tiene 3 formularios.
+- WP Mail SMTP está configurado con Google / Gmail OAuth.
+- El remitente actual es `AI Aprendí`.
+- No hay conexión de respaldo configurada.
+
 Decisión inicial:
 
 - mantener
@@ -193,6 +234,7 @@ Decisión inicial:
 - revisar envío de correos
 - revisar si hay formularios de suscripción
 - revisar consentimiento
+- cambiar identidad del remitente a HUMANía durante la migración de marca
 
 ## Plugins de seguridad
 
@@ -249,10 +291,11 @@ Orden recomendado:
 1. hCaptcha, si no se usa.
 2. Plantillas de inicio, si no se usa.
 3. Plantillas de inicio de Kadence WP, si no se usa.
-4. WP Popular Posts, si se puede sustituir.
-5. PRO Elements, cuando no haya dependencia.
-6. Ultimate Addons for Elementor, cuando no haya dependencia.
-7. Elementor, solo al final.
+4. Lean Player, si solo contiene demos.
+5. WP Popular Posts, si se puede sustituir.
+6. PRO Elements, cuando no haya dependencia.
+7. Ultimate Addons for Elementor, cuando no haya dependencia.
+8. Elementor, solo al final.
 
 ## Reglas
 
@@ -263,14 +306,16 @@ Orden recomendado:
 - No eliminar WPForms sin revisar formularios.
 - No eliminar WP Mail SMTP si hay formularios o newsletter futura.
 - No mantener plugins inactivos sin motivo.
+- No usar Gmail como solución de newsletter masiva.
 
 ## Pendiente
 
 - revisar formularios existentes en WPForms
-- revisar ajustes de WP Mail SMTP
-- revisar uso real de Lean Player
+- revisar ajustes completos de WP Mail SMTP
+- revisar uso real de Lean Player en páginas públicas
 - revisar si WP Popular Posts se muestra en la web
 - revisar configuración de Complianz
+- completar tareas abiertas de Complianz
 - revisar configuración de LiteSpeed Cache
 - revisar alertas de Really Simple Security
 - revisar dependencia exacta de PRO Elements
