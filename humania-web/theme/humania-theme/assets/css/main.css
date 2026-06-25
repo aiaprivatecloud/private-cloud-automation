@@ -1252,3 +1252,141 @@ body.single .humania-episode-box a {
     }
 }
 
+/* Listen page HUMANía */
+.humania-listen {
+    min-height: 70vh;
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+.humania-listen__hero {
+    background:
+        radial-gradient(circle at top right, rgba(0, 209, 193, 0.22), transparent 34rem),
+        #0B1B2B;
+    color: #FFFFFF;
+    padding: 3.5rem 1rem;
+}
+
+.humania-listen__hero > * {
+    max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.humania-listen__eyebrow {
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    color: #00D1C1;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.humania-listen__title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: clamp(2.6rem, 11vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.07em;
+    text-wrap: balance;
+}
+
+.humania-listen__intro {
+    max-width: 760px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: clamp(1.12rem, 3vw, 1.45rem);
+    line-height: 1.55;
+    font-weight: 650;
+}
+
+.humania-listen__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+.humania-listen-card {
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    padding: 1.35rem;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-listen-card__title {
+    margin: 0 0 0.65rem;
+    color: #0B1B2B;
+    font-size: 1.45rem;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+}
+
+.humania-listen-card__text {
+    margin: 0;
+    line-height: 1.65;
+}
+
+.humania-listen-card__button,
+.humania-listen-card__pending {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    min-height: 46px;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    font-weight: 900;
+}
+
+.humania-listen-card__button {
+    background: #00D1C1;
+    color: #0B1B2B;
+    text-decoration: none;
+}
+
+.humania-listen-card__button:hover {
+    background: #FFB703;
+    color: #0B1B2B;
+}
+
+.humania-listen-card__pending {
+    background: rgba(11, 27, 43, 0.08);
+    color: rgba(31, 46, 58, 0.75);
+}
+
+.humania-listen-card--pending {
+    opacity: 0.82;
+}
+
+.humania-listen a:focus-visible {
+    outline: 3px solid #FFB703;
+    outline-offset: 4px;
+}
+
+@media (min-width: 760px) {
+    .humania-listen__hero {
+        padding: 4.5rem 2rem;
+    }
+
+    .humania-listen__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 2.5rem 2rem 4rem;
+    }
+}
+
+@media (min-width: 1040px) {
+    .humania-listen__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .humania-listen-card:first-child {
+        grid-column: span 2;
+    }
+}
+
