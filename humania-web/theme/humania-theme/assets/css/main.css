@@ -300,3 +300,198 @@ select:focus-visible {
     }
 }
 
+/* Front page HUMANía */
+.humania-front {
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+.humania-front__hero {
+    padding: 4rem 1rem;
+    background:
+        radial-gradient(circle at top left, rgba(0, 209, 193, 0.22), transparent 34rem),
+        linear-gradient(135deg, #0B1B2B 0%, #102B43 100%);
+    color: #FFFFFF;
+}
+
+.humania-front__hero-inner {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.humania-front__eyebrow,
+.humania-front__section-kicker {
+    margin: 0 0 0.75rem;
+    color: #FFB703;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.humania-front__title {
+    max-width: 10ch;
+    margin: 0;
+    font-size: clamp(3rem, 15vw, 7rem);
+    line-height: 0.92;
+    text-wrap: balance;
+}
+
+.humania-front__intro {
+    max-width: 700px;
+    margin: 1.5rem 0 0;
+    font-size: clamp(1.1rem, 3vw, 1.45rem);
+    line-height: 1.55;
+}
+
+.humania-front__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-top: 2rem;
+}
+
+.humania-front__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.85rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none;
+}
+
+.humania-front__button--primary {
+    background: #00D1C1;
+    color: #0B1B2B;
+}
+
+.humania-front__button--secondary {
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    color: #FFFFFF;
+}
+
+.humania-front__button:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.humania-front__button:focus-visible,
+.humania-front-card__title a:focus-visible,
+.humania-front-card__image-link:focus-visible {
+    outline: 3px solid #FFB703;
+    outline-offset: 4px;
+}
+
+.humania-front__section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+.humania-front__section-title {
+    margin: 0;
+    color: #0B1B2B;
+    font-size: clamp(2rem, 8vw, 4rem);
+    line-height: 1;
+}
+
+.humania-front__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.humania-front-card {
+    overflow: hidden;
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-front-card__image-link {
+    display: block;
+}
+
+.humania-front-card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.humania-front-card__body {
+    padding: 1.25rem;
+}
+
+.humania-front-card__meta {
+    margin: 0 0 0.6rem;
+    color: rgba(31, 46, 58, 0.72);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.humania-front-card__title {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+.humania-front-card__title a {
+    color: #0B1B2B;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.16em;
+}
+
+.humania-front-card__excerpt {
+    margin-top: 0.8rem;
+    line-height: 1.6;
+}
+
+.humania-front-card__excerpt p {
+    margin: 0;
+}
+
+.humania-front__empty {
+    margin-top: 2rem;
+    font-weight: 700;
+}
+
+@media (min-width: 560px) {
+    .humania-front__actions {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .humania-front__button {
+        width: auto;
+        min-width: 12rem;
+    }
+}
+
+@media (min-width: 760px) {
+    .humania-front__hero {
+        padding: 6rem 2rem;
+    }
+
+    .humania-front__section {
+        padding: 4rem 2rem;
+    }
+
+    .humania-front__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+@media (min-width: 1040px) {
+    .humania-front__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
