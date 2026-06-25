@@ -58,3 +58,16 @@ function humania_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'humania_enqueue_assets' );
+
+/**
+ * Register HUMANía navigation menus.
+ */
+function humania_register_navigation_menus(): void {
+    register_nav_menus(
+        array(
+            'primary' => __( 'Menú principal', 'humania-theme' ),
+        )
+    );
+}
+add_action( 'after_setup_theme', 'humania_register_navigation_menus' );
+
