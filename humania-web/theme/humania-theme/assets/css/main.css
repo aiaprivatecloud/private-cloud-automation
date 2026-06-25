@@ -218,3 +218,85 @@ select:focus-visible {
 		transition-duration: 0.01ms !important;
 	}
 }
+
+/* Single post HUMANía */
+.humania-single-main {
+    padding: 1rem;
+}
+
+.humania-single {
+    max-width: 860px;
+    margin: 0 auto 3rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.humania-single__eyebrow {
+    margin: 0 0 0.75rem;
+    color: #ffb703;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.humania-single__title {
+    margin: 0;
+    font-size: clamp(2rem, 8vw, 4.5rem);
+    line-height: 1;
+}
+
+.humania-single__meta {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    opacity: 0.82;
+}
+
+.humania-single__meta a {
+    color: inherit;
+}
+
+.humania-single__image {
+    margin: 1.5rem 0 0;
+}
+
+.humania-single__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.humania-single__content {
+    margin-top: 2rem;
+    font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+    line-height: 1.75;
+}
+
+.humania-single__content h2,
+.humania-single__content h3 {
+    margin-top: 2rem;
+    line-height: 1.2;
+}
+
+.humania-single__content a {
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.18em;
+}
+
+.humania-single__footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 760px) {
+    .humania-single-main {
+        padding: 2rem;
+    }
+
+    .humania-single {
+        padding: 2.5rem;
+    }
+}
+
