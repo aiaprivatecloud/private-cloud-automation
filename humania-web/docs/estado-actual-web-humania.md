@@ -66,6 +66,7 @@ El tema contiene actualmente:
 - archive.php
 - search.php
 - 404.php
+- page-escuchar-humania.php
 - assets/css/main.css
 - assets/js/main.js
 
@@ -228,6 +229,36 @@ Incluye enlaces a:
 
 Las páginas base existen en WordPress y los enlaces funcionan.
 
+## Página global de escucha
+
+Archivo:
+
+page-escuchar-humania.php
+
+Slug esperado:
+
+escuchar-humania
+
+URL de pruebas:
+
+seashell-lion-245826.hostingersite.com/escuchar-humania/
+
+Estado:
+
+Funciona correctamente en WordPress limpio.
+
+Incluye:
+
+- hero propio;
+- tarjeta RSS global del podcast;
+- tarjetas para Spotify, Apple Podcasts, iVoox y YouTube;
+- enlaces pendientes de configurar para plataformas generales;
+- diseño alineado con HUMANía.
+
+Decisión editorial:
+
+El RSS general del podcast no se muestra dentro de cada episodio. Se ubica en una página global de escucha porque representa el feed completo del podcast, no un episodio individual.
+
 ## Plugin activo
 
 Plugin:
@@ -283,6 +314,7 @@ Páginas base creadas y publicadas:
 - Política de cookies
 - Términos y condiciones
 - Contacto
+- Dónde escuchar HUMANía
 
 Las páginas legales tienen contenido provisional pendiente de revisión final.
 
@@ -299,7 +331,8 @@ Se ha comprobado en WordPress limpio:
 - enlaces legales;
 - categoría;
 - búsqueda;
-- página 404.
+- página 404;
+- página global Dónde escuchar HUMANía.
 
 ## Decisiones tomadas
 
@@ -336,12 +369,13 @@ Próximos bloques recomendados:
 2. Crear plantilla o documentación para la página Sobre HUMANía definitiva.
 3. Preparar textos legales reales.
 4. Añadir página de episodios si se decide separarla de la portada.
-5. Diseñar página de contacto funcional.
-6. Revisar accesibilidad con checklist.
-7. Revisar rendimiento y caché.
-8. Avanzar en automatización de noticias IA.
-9. Preparar migración de contenido desde la web antigua.
-10. Definir proceso final de despliegue a producción.
+5. Completar enlaces oficiales de Spotify, Apple Podcasts, iVoox y YouTube en la página Dónde escuchar HUMANía.
+6. Diseñar página de contacto funcional.
+7. Revisar accesibilidad con checklist.
+8. Revisar rendimiento y caché.
+9. Avanzar en automatización de noticias IA.
+10. Preparar migración de contenido desde la web antigua.
+11. Definir proceso final de despliegue a producción.
 
 ## Estado general
 
@@ -357,4 +391,5 @@ No es todavía la versión final, pero ya cuenta con:
 - reproductor funcional;
 - plantillas principales;
 - plantillas auxiliares;
+- página global de escucha;
 - pruebas correctas en WordPress limpio.
