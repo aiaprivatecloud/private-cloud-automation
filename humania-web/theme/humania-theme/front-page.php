@@ -26,8 +26,8 @@ get_header();
                 <a class="humania-front__button humania-front__button--primary" href="#ultimos-episodios">
                     Escuchar episodios
                 </a>
-                <a class="humania-front__button humania-front__button--secondary" href="<?php echo esc_url( home_url( '/feed/' ) ); ?>">
-                    RSS del sitio
+                <a class="humania-front__button humania-front__button--secondary" href="<?php echo esc_url( home_url( '/sobre-humania/' ) ); ?>">
+                    Sobre HUMANía
                 </a>
             </div>
         </div>

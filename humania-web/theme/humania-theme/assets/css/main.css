@@ -954,3 +954,301 @@ select:focus-visible {
     }
 }
 
+/* Automatic episode template HUMANía */
+.humania-episode {
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+.humania-episode__hero {
+    background:
+        radial-gradient(circle at top right, rgba(0, 209, 193, 0.2), transparent 34rem),
+        #0B1B2B;
+    color: #FFFFFF;
+}
+
+.humania-episode__hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 3rem 1rem 2rem;
+}
+
+.humania-episode__eyebrow {
+    margin: 0 0 0.85rem;
+    color: #00D1C1;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.humania-episode__title {
+    max-width: 980px;
+    margin: 0;
+    font-size: clamp(2.6rem, 11vw, 6.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+    text-wrap: balance;
+}
+
+.humania-episode__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 800;
+}
+
+.humania-episode__meta a {
+    color: inherit;
+    text-decoration-color: #00D1C1;
+    text-underline-offset: 0.18em;
+}
+
+.humania-episode__intro {
+    max-width: 760px;
+    margin: 1.4rem 0 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(1.12rem, 3vw, 1.45rem);
+    line-height: 1.55;
+    font-weight: 650;
+}
+
+.humania-episode__image-wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1rem 2rem;
+}
+
+.humania-episode__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 620px;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.humania-episode__player {
+    max-width: 1120px;
+    margin: -1.2rem auto 0;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.humania-episode__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+.humania-episode-section,
+.humania-episode-box {
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-episode-section {
+    padding: 1.4rem;
+}
+
+.humania-episode-section + .humania-episode-section {
+    margin-top: 1.25rem;
+}
+
+.humania-episode-section h2,
+.humania-episode-box h2 {
+    margin: 0 0 0.9rem;
+    color: #0B1B2B;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+}
+
+.humania-episode-section p,
+.humania-episode__content p {
+    margin: 0;
+    font-size: 1.06rem;
+    line-height: 1.75;
+}
+
+.humania-episode-section p + p,
+.humania-episode__content p + p {
+    margin-top: 1rem;
+}
+
+.humania-episode__content h2,
+.humania-episode__content h3,
+.humania-episode__content h4 {
+    margin-top: 2rem;
+    color: #0B1B2B;
+    line-height: 1.15;
+}
+
+.humania-episode__content a,
+.humania-episode-box a {
+    color: #0B1B2B;
+    font-weight: 900;
+    text-decoration-color: #00D1C1;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.18em;
+}
+
+.humania-episode__content a:hover,
+.humania-episode-box a:hover {
+    text-decoration-color: #FFB703;
+}
+
+.humania-episode-box {
+    padding: 1.2rem;
+}
+
+.humania-episode-box + .humania-episode-box {
+    margin-top: 1rem;
+}
+
+.humania-episode-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.humania-episode-box li {
+    line-height: 1.55;
+}
+
+.humania-episode-box li + li {
+    margin-top: 0.55rem;
+}
+
+.humania-episode-references {
+    font-size: 0.96rem;
+}
+
+.humania-episode a:focus-visible {
+    outline: 3px solid #FFB703;
+    outline-offset: 4px;
+}
+
+@media (min-width: 860px) {
+    .humania-episode__hero-inner {
+        padding: 4.5rem 2rem 2.5rem;
+    }
+
+    .humania-episode__image-wrap,
+    .humania-episode__player,
+    .humania-episode__layout {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .humania-episode__layout {
+        grid-template-columns: minmax(0, 1fr) 320px;
+        align-items: start;
+        gap: 1.5rem;
+    }
+
+    .humania-episode__aside {
+        position: sticky;
+        top: 1.5rem;
+    }
+
+    .humania-episode-section {
+        padding: 1.7rem;
+    }
+}
+
+/* Episode template corrections HUMANía */
+body.single .humania-episode {
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+body.single .humania-episode__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+body.single .humania-episode-section,
+body.single .humania-episode-box {
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    color: #1F2E3A;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+body.single .humania-episode-section {
+    padding: 1.4rem;
+}
+
+body.single .humania-episode-box {
+    padding: 1.2rem;
+}
+
+body.single .humania-episode-section h2,
+body.single .humania-episode-box h2 {
+    margin: 0 0 0.9rem;
+    color: #0B1B2B;
+    font-size: clamp(1.45rem, 4vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+}
+
+body.single .humania-episode-section p {
+    margin: 0;
+    font-size: 1.06rem;
+    line-height: 1.75;
+}
+
+body.single .humania-episode-section p + p {
+    margin-top: 1rem;
+}
+
+body.single .humania-episode-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+body.single .humania-episode-box li + li {
+    margin-top: 0.55rem;
+}
+
+body.single .humania-episode-box a {
+    color: #0B1B2B;
+    font-weight: 900;
+    text-decoration-color: #00D1C1;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.18em;
+}
+
+@media (min-width: 860px) {
+    body.single .humania-episode__layout {
+        grid-template-columns: minmax(0, 1fr) 320px;
+        align-items: start;
+        gap: 1.5rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    body.single .humania-episode__aside {
+        position: sticky;
+        top: 1.5rem;
+    }
+
+    body.single .humania-episode-section {
+        padding: 1.7rem;
+    }
+}
+
