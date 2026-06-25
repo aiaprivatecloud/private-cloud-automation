@@ -495,3 +495,85 @@ select:focus-visible {
     }
 }
 
+/* Simple pages HUMANía */
+.humania-page-main {
+    padding: 2rem 1rem;
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+.humania-page {
+    max-width: 880px;
+    margin: 0 auto 3rem;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-page__header {
+    margin-bottom: 1.5rem;
+}
+
+.humania-page__eyebrow {
+    margin: 0 0 0.75rem;
+    color: #0B1B2B;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.humania-page__title {
+    margin: 0;
+    color: #0B1B2B;
+    font-size: clamp(2.3rem, 10vw, 5rem);
+    line-height: 0.98;
+    text-wrap: balance;
+}
+
+.humania-page__image {
+    margin: 1.5rem 0;
+}
+
+.humania-page__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.humania-page__content {
+    font-size: clamp(1.05rem, 2.4vw, 1.18rem);
+    line-height: 1.75;
+}
+
+.humania-page__content h2,
+.humania-page__content h3 {
+    margin-top: 2rem;
+    color: #0B1B2B;
+    line-height: 1.2;
+}
+
+.humania-page__content a {
+    color: #0B1B2B;
+    font-weight: 800;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.18em;
+}
+
+.humania-page__content a:focus-visible {
+    outline: 3px solid #FFB703;
+    outline-offset: 4px;
+}
+
+@media (min-width: 760px) {
+    .humania-page-main {
+        padding: 4rem 2rem;
+    }
+
+    .humania-page {
+        padding: 2.5rem;
+    }
+}
+
