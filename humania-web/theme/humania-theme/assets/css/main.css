@@ -740,3 +740,217 @@ select:focus-visible {
     }
 }
 
+/* Listing, search and error templates HUMANía */
+.humania-listing,
+.humania-error {
+    padding: 3rem 1rem;
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+.humania-listing__header,
+.humania-error__box {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.humania-listing__eyebrow,
+.humania-error__eyebrow {
+    margin: 0 0 0.75rem;
+    color: #0B1B2B;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.humania-listing__title,
+.humania-error__title {
+    margin: 0;
+    color: #0B1B2B;
+    font-size: clamp(2.4rem, 10vw, 5rem);
+    line-height: 0.98;
+    text-wrap: balance;
+}
+
+.humania-listing__description,
+.humania-error__text {
+    max-width: 720px;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.humania-listing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 1120px;
+    margin: 2rem auto 0;
+}
+
+.humania-listing-card {
+    overflow: hidden;
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-listing-card__image-link {
+    display: block;
+}
+
+.humania-listing-card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.humania-listing-card__body {
+    padding: 1.25rem;
+}
+
+.humania-listing-card__meta {
+    margin: 0 0 0.6rem;
+    color: rgba(31, 46, 58, 0.72);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.humania-listing-card__title {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+.humania-listing-card__title a {
+    color: #0B1B2B;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.16em;
+}
+
+.humania-listing-card__excerpt {
+    margin-top: 0.8rem;
+    line-height: 1.6;
+}
+
+.humania-listing-card__excerpt p {
+    margin: 0;
+}
+
+.humania-pagination {
+    max-width: 1120px;
+    margin: 2rem auto 0;
+}
+
+.humania-pagination .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.humania-pagination a,
+.humania-pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    min-width: 42px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    background: #FFFFFF;
+    color: #0B1B2B;
+    font-weight: 900;
+}
+
+.humania-pagination .current {
+    background: #00D1C1;
+}
+
+.humania-search-form {
+    max-width: 980px;
+    margin: 2rem auto 0;
+}
+
+.humania-search-form__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+}
+
+.humania-search-form__row {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.humania-search-form__input {
+    min-height: 48px;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(11, 27, 43, 0.22);
+    border-radius: 999px;
+    font: inherit;
+}
+
+.humania-search-form__button,
+.humania-error__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.8rem 1.2rem;
+    border: 0;
+    border-radius: 999px;
+    background: #00D1C1;
+    color: #0B1B2B;
+    font: inherit;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.humania-error__button {
+    margin-top: 1.5rem;
+}
+
+.humania-listing__empty {
+    max-width: 980px;
+    margin: 2rem auto 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.humania-listing a:focus-visible,
+.humania-search-form__input:focus-visible,
+.humania-search-form__button:focus-visible,
+.humania-error__button:focus-visible {
+    outline: 3px solid #FFB703;
+    outline-offset: 4px;
+}
+
+@media (min-width: 720px) {
+    .humania-listing,
+    .humania-error {
+        padding: 4rem 2rem;
+    }
+
+    .humania-listing__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .humania-search-form__row {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+}
+
+@media (min-width: 1040px) {
+    .humania-listing__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
