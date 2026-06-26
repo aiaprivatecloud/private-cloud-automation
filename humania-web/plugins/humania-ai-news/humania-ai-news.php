@@ -25,6 +25,8 @@ $humania_ai_news_includes = [
     'includes/summarize.php',
     'includes/create-draft.php',
     'includes/player-shortcode.php',
+    'includes/news-post-type.php',
+    'includes/news-meta-box.php',
     'admin/settings-page.php',
     'admin/review-page.php',
 ];

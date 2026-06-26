@@ -1390,3 +1390,182 @@ body.single .humania-episode-box a {
     }
 }
 
+/* Revista HUMANía */
+.humania-revista {
+    min-height: 70vh;
+    background: #F2F5F8;
+    color: #1F2E3A;
+}
+
+.humania-revista__hero {
+    background:
+        radial-gradient(circle at top right, rgba(0, 209, 193, 0.22), transparent 34rem),
+        #0B1B2B;
+    color: #FFFFFF;
+    padding: 3.5rem 1rem;
+}
+
+.humania-revista__hero > * {
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.humania-revista__eyebrow {
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    color: #00D1C1;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.humania-revista__title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    max-width: 980px;
+    font-size: clamp(2.4rem, 10vw, 5.7rem);
+    line-height: 0.96;
+    letter-spacing: -0.07em;
+    text-wrap: balance;
+}
+
+.humania-revista__intro {
+    max-width: 760px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: clamp(1.12rem, 3vw, 1.45rem);
+    line-height: 1.55;
+    font-weight: 650;
+}
+
+.humania-revista__content {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+.humania-revista__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.humania-news-card {
+    overflow: hidden;
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-news-card__media {
+    background: rgba(11, 27, 43, 0.08);
+}
+
+.humania-news-card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.humania-news-card__body {
+    padding: 1.25rem;
+}
+
+.humania-news-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.65rem;
+    color: rgba(31, 46, 58, 0.72);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.humania-news-card__title {
+    margin: 0;
+    color: #0B1B2B;
+    font-size: clamp(1.35rem, 4vw, 1.85rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+}
+
+.humania-news-card__summary {
+    margin: 0.85rem 0 0;
+    line-height: 1.65;
+}
+
+.humania-news-card__language {
+    margin: 0.8rem 0 0;
+    color: rgba(31, 46, 58, 0.76);
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+.humania-news-card__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    background: #00D1C1;
+    color: #0B1B2B;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.humania-news-card__button:hover {
+    background: #FFB703;
+    color: #0B1B2B;
+}
+
+.humania-news-card__button:focus-visible {
+    outline: 3px solid #FFB703;
+    outline-offset: 4px;
+}
+
+.humania-revista__empty {
+    max-width: 760px;
+    border: 1px solid rgba(11, 27, 43, 0.12);
+    border-radius: 1.25rem;
+    background: #FFFFFF;
+    padding: 1.5rem;
+    box-shadow: 0 16px 44px rgba(11, 27, 43, 0.08);
+}
+
+.humania-revista__empty h2 {
+    margin-top: 0;
+    color: #0B1B2B;
+}
+
+.humania-revista__empty p {
+    margin-bottom: 0;
+}
+
+@media (min-width: 760px) {
+    .humania-revista__hero {
+        padding: 4.5rem 2rem;
+    }
+
+    .humania-revista__content {
+        padding: 2.5rem 2rem 4rem;
+    }
+
+    .humania-revista__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1100px) {
+    .humania-revista__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
