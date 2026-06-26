@@ -22,6 +22,7 @@ $humania_ai_news_includes = [
     'includes/normalize-item.php',
     'includes/deduplicate.php',
     'includes/import-news.php',
+    'includes/cron.php',
     'includes/classify.php',
     'includes/summarize.php',
     'includes/create-draft.php',
@@ -240,3 +241,26 @@ function humania_ai_news_enqueue_player_assets(): void
     );
 }
 add_action('wp_enqueue_scripts', 'humania_ai_news_enqueue_player_assets');
+
+/**
+ * Schedules the RSS import cron when the plugin is activated.
+ */
+function humania_ai_news_activate_plugin(): void
+{
+    if (function_exists('humania_ai_news_schedule_cron')) {
+        humania_ai_news_schedule_cron();
+    }
+}
+register_activation_hook(__FILE__, 'humania_ai_news_activate_plugin');
+
+/**
+ * Clears the RSS import cron when the plugin is deactivated.
+ */
+function humania_ai_news_deactivate_plugin(): void
+{
+    if (function_exists('humania_ai_news_clear_cron')) {
+        humania_ai_news_clear_cron();
+    }
+}
+register_deactivation_hook(__FILE__, 'humania_ai_news_deactivate_plugin');
+
