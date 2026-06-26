@@ -105,6 +105,7 @@ function humania_ai_news_render_news_meta_box(WP_Post $post): void
             <label for="humania_news_editorial_status"><strong>Estado editorial HUMANía</strong></label><br>
             <select id="humania_news_editorial_status" name="humania_news_editorial_status">
                 <option value="pending_review" <?php selected($editorial_status, 'pending_review'); ?>>Pendiente de revisión</option>
+                <option value="in_review" <?php selected($editorial_status, 'in_review'); ?>>En revisión</option>
                 <option value="approved" <?php selected($editorial_status, 'approved'); ?>>Aprobada para publicar</option>
                 <option value="discarded" <?php selected($editorial_status, 'discarded'); ?>>Descartada</option>
             </select>
@@ -192,7 +193,7 @@ function humania_ai_news_save_news_meta(int $post_id): void
     }
 
     $allowed_languages = ['es', 'en', 'fr', 'de', 'it', 'pt', 'other'];
-    $allowed_statuses = ['pending_review', 'approved', 'discarded'];
+    $allowed_statuses = ['pending_review', 'in_review', 'approved', 'discarded'];
 
     $source_name = isset($_POST['humania_news_source_name'])
         ? sanitize_text_field(wp_unslash($_POST['humania_news_source_name']))
@@ -220,6 +221,20 @@ function humania_ai_news_save_news_meta(int $post_id): void
 
     if (!in_array($editorial_status, $allowed_statuses, true)) {
         $editorial_status = 'pending_review';
+    }
+
+    /*
+     * If a HUMANía news item is manually published, it must be considered
+     * approved for the public Revista HUMANía page.
+     *
+     * This happens here because WordPress may save meta fields after the
+     * post status transition hook.
+     */
+    if (
+        get_post_status($post_id) === 'publish'
+        && in_array($editorial_status, ['', 'pending_review', 'in_review'], true)
+    ) {
+        $editorial_status = 'approved';
     }
 
     $short_summary = isset($_POST['humania_news_short_summary'])
