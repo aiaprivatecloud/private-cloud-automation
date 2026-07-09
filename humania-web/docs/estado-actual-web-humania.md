@@ -393,3 +393,24 @@ No es todavía la versión final, pero ya cuenta con:
 - plantillas auxiliares;
 - página global de escucha;
 - pruebas correctas en WordPress limpio.
+
+## Estructura pública actual
+
+La web pública de HUMANía queda organizada en cinco accesos principales:
+
+- Inicio
+- Podcast
+- Noticias
+- Sobre H~
+- Contacto
+
+La página Podcast mantiene el slug `/escuchar-humania/` para no romper enlaces previos.
+
+La sección Noticias usa la página `/revista-humania/`, aunque en navegación pública se muestra como “Noticias” por claridad para el usuario.
+
+La página Contacto no utiliza formulario. Muestra dos canales directos:
+
+- `comunidad@aiaprendi.com` para propuestas editoriales, comunidad y contenidos;
+- `social@aiaprendi.com` para patrocinios, colaboraciones y asuntos comerciales.
+
+Las páginas legales existen y están enlazadas, pero quedan pendientes de contenido definitivo antes de producción.
