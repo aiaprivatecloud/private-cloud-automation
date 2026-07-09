@@ -98,6 +98,88 @@ get_header();
             </p>
         <?php endif; ?>
     </section>
+
+    <section id="ultimas-noticias" class="humania-front__section" aria-labelledby="humania-news-title">
+        <div class="humania-front__section-header">
+            <p class="humania-front__section-kicker">Noticias</p>
+            <h2 id="humania-news-title" class="humania-front__section-title">
+                Últimas noticias
+            </h2>
+        </div>
+
+        <?php
+        $latest_news = new WP_Query(
+            array(
+                'post_type'           => 'humania_news',
+                'posts_per_page'      => 3,
+                'post_status'         => 'publish',
+                'ignore_sticky_posts' => true,
+                'meta_query'          => array(
+                    array(
+                        'key'     => 'humania_news_editorial_status',
+                        'value'   => 'approved',
+                        'compare' => '=',
+                    ),
+                ),
+            )
+        );
+        ?>
+
+        <?php if ( $latest_news->have_posts() ) : ?>
+            <div class="humania-front__grid">
+                <?php while ( $latest_news->have_posts() ) : ?>
+                    <?php
+                    $latest_news->the_post();
+
+                    $source_name = get_post_meta( get_the_ID(), 'humania_news_source_name', true );
+                    $original_date = get_post_meta( get_the_ID(), 'humania_news_original_date', true );
+                    $original_url = get_post_meta( get_the_ID(), 'humania_news_original_url', true );
+                    ?>
+
+                    <article id="news-<?php the_ID(); ?>" <?php post_class( 'humania-front-card humania-front-card--news' ); ?>>
+                        <div class="humania-front-card__body">
+                            <p class="humania-front-card__meta">
+                                <?php if ( ! empty( $source_name ) ) : ?>
+                                    <span><?php echo esc_html( (string) $source_name ); ?></span>
+                                <?php endif; ?>
+
+                                <?php if ( ! empty( $original_date ) ) : ?>
+                                    <span><?php echo esc_html( (string) $original_date ); ?></span>
+                                <?php endif; ?>
+                            </p>
+
+                            <h3 class="humania-front-card__title">
+                                <?php echo esc_html( get_the_title() ); ?>
+                            </h3>
+
+                            <div class="humania-front-card__excerpt">
+                                <?php the_excerpt(); ?>
+                            </div>
+
+                            <?php if ( ! empty( $original_url ) ) : ?>
+                                <a class="humania-front-card__link" href="<?php echo esc_url( (string) $original_url ); ?>" target="_blank" rel="noopener noreferrer">
+                                    Leer en el medio original
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </article>
+
+                <?php endwhile; ?>
+            </div>
+
+            <?php wp_reset_postdata(); ?>
+
+            <p class="humania-front__more">
+                <a class="humania-front__button humania-front__button--secondary" href="<?php echo esc_url( home_url( '/revista-humania/' ) ); ?>">
+                    Ver todas las noticias
+                </a>
+            </p>
+        <?php else : ?>
+            <p class="humania-front__empty">
+                Todavía no hay noticias aprobadas.
+            </p>
+        <?php endif; ?>
+    </section>
 </main>
 
 <?php
