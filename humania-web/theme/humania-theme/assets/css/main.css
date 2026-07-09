@@ -1569,3 +1569,70 @@ body.single .humania-episode-box a {
     }
 }
 
+/* Contacto HUMANía */
+
+.humania-contact {
+        display: grid;
+        gap: 3rem;
+}
+
+.humania-contact__hero {
+        max-width: 760px;
+}
+
+.humania-contact__eyebrow {
+        margin: 0 0 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+}
+
+.humania-contact__title {
+        margin: 0;
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        line-height: 0.95;
+}
+
+.humania-contact__intro {
+        max-width: 680px;
+        margin-top: 1rem;
+        font-size: 1.15rem;
+}
+
+.humania-contact__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+}
+
+.humania-contact-card,
+.humania-contact__notice {
+        padding: 1.5rem;
+        border: 1px solid currentColor;
+        border-radius: 1rem;
+}
+
+.humania-contact-card__title {
+        margin-top: 0;
+}
+
+.humania-contact-card__button {
+        display: inline-flex;
+        margin-top: 1rem;
+        font-weight: 700;
+        word-break: break-word;
+}
+
+.humania-contact__notice {
+        max-width: 860px;
+}
+
+.humania-contact__notice h2 {
+        margin-top: 0;
+}
+
+@media (max-width: 760px) {
+        .humania-contact__grid {
+                grid-template-columns: 1fr;
+        }
+}

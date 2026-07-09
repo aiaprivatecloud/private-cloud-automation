@@ -42,8 +42,9 @@
                 ?>
                 <ul class="site-nav__list">
                     <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Inicio</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/#ultimos-episodios' ) ); ?>">Episodios</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/sobre-humania/' ) ); ?>">Sobre HUMANía</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/escuchar-humania/' ) ); ?>">Podcast</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/revista-humania/' ) ); ?>">Revista</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/sobre-humania/' ) ); ?>">Sobre</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/contacto/' ) ); ?>">Contacto</a></li>
                 </ul>
                 <?php
