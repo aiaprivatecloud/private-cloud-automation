@@ -1636,3 +1636,19 @@ body.single .humania-episode-box a {
                 grid-template-columns: 1fr;
         }
 }
+
+/* Noticias en portada */
+
+.humania-front-card--news .humania-front-card__title {
+        margin-bottom: 0.75rem;
+}
+
+.humania-front-card__link {
+        display: inline-flex;
+        margin-top: 1rem;
+        font-weight: 700;
+}
+
+.humania-front__more {
+        margin-top: 1.5rem;
+}
