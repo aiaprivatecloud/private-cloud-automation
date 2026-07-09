@@ -137,3 +137,22 @@ Solo pasar a nuevas fuentes o mejoras cuando durante dos días se confirme:
 - Mejorar detección de idioma.
 - Añadir resúmenes ampliados para medios no castellanos.
 - Añadir gestión segura de imágenes candidatas.
+
+## Validación móvil del panel de revisión
+
+La pantalla `HUMANía IA → Revisión` ha sido refinada y validada desde móvil.
+
+Mejoras aplicadas:
+
+- contadores por estado editorial;
+- filtros para pendientes, en revisión, aprobadas, descartadas y todas;
+- botón para abrir la noticia original;
+- acciones claras para revisar, editar y descartar;
+- tabla convertida en tarjetas en pantallas pequeñas.
+
+El flujo seguro se mantiene:
+
+- la automatización solo importa candidatas;
+- las noticias siguen entrando como borrador;
+- no se publica automáticamente;
+- solo aparecen en `/revista-humania/` tras publicación manual y estado editorial aprobado.
