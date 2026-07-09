@@ -132,6 +132,84 @@ function humania_ai_news_render_review_page(): void
         </div>
 
         <div class="humania-ai-news-card">
+            <h2><?php echo esc_html__('Automatización cada 6 horas', 'humania'); ?></h2>
+
+            <?php
+            $next_cron = defined('HUMANIA_AI_NEWS_CRON_HOOK')
+                ? wp_next_scheduled(HUMANIA_AI_NEWS_CRON_HOOK)
+                : false;
+
+            $last_cron = get_option('humania_ai_news_last_cron_import');
+            ?>
+
+            <table class="widefat striped">
+                <tbody>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Estado', 'humania'); ?></th>
+                        <td>
+                            <?php
+                            echo $next_cron
+                                ? esc_html__('Programada', 'humania')
+                                : esc_html__('No programada', 'humania');
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Próxima ejecución', 'humania'); ?></th>
+                        <td>
+                            <?php
+                            echo $next_cron
+                                ? esc_html(wp_date('d/m/Y H:i', $next_cron))
+                                : esc_html__('Sin fecha programada', 'humania');
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Zona horaria WordPress', 'humania'); ?></th>
+                        <td><?php echo esc_html(wp_timezone_string()); ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Última ejecución automática', 'humania'); ?></th>
+                        <td>
+                            <?php
+                            if (is_array($last_cron) && !empty($last_cron['time'])) {
+                                echo esc_html((string) $last_cron['time']);
+                            } else {
+                                echo esc_html__('Todavía no ejecutada', 'humania');
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Último resultado automático', 'humania'); ?></th>
+                        <td>
+                            <?php
+                            if (is_array($last_cron) && !empty($last_cron['result']) && is_array($last_cron['result'])) {
+                                echo esc_html(
+                                    sprintf(
+                                        'Leídas: %d · Creadas: %d · Duplicadas: %d · Inválidas: %d · Errores: %d',
+                                        $last_cron['result']['fetched'] ?? 0,
+                                        $last_cron['result']['created'] ?? 0,
+                                        $last_cron['result']['duplicates'] ?? 0,
+                                        $last_cron['result']['invalid'] ?? 0,
+                                        $last_cron['result']['errors'] ?? 0
+                                    )
+                                );
+                            } else {
+                                echo esc_html__('Sin resultado todavía', 'humania');
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                <?php echo esc_html__('La automatización importa candidatas como borrador y pendientes de revisión. No publica noticias automáticamente.', 'humania'); ?>
+            </p>
+        </div>
+
+        <div class="humania-ai-news-card">
             <h2><?php echo esc_html__('Últimas candidatas pendientes', 'humania'); ?></h2>
 
             <?php if ($recent_candidates->have_posts()) : ?>
