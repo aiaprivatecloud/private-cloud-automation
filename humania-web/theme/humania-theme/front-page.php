@@ -23,14 +23,13 @@ get_header();
             </p>
 
             <div class="humania-front__actions" aria-label="Acciones principales">
-                <a class="humania-front__button humania-front__button--primary" href="#ultimos-episodios">
-                    Escuchar episodios
+                <a class="humania-front__button humania-front__button--primary" href="<?php echo esc_url( home_url( '/escuchar-humania/' ) ); ?>">
+                    Escuchar el podcast
                 </a>
-                <a class="humania-front__button humania-front__button--secondary" href="<?php echo esc_url( home_url( '/sobre-humania/' ) ); ?>">
-                    Sobre HUMANía
+                <a class="humania-front__button humania-front__button--secondary" href="<?php echo esc_url( home_url( '/revista-humania/' ) ); ?>">
+                    Leer la revista
                 </a>
             </div>
-        </div>
     </section>
 
     <section id="ultimos-episodios" class="humania-front__section" aria-labelledby="humania-latest-title">
@@ -47,6 +46,13 @@ get_header();
                 'posts_per_page'      => 6,
                 'post_status'         => 'publish',
                 'ignore_sticky_posts' => true,
+                'meta_query'          => array(
+                    array(
+                        'key'     => 'humania_audio_url',
+                        'value'   => '',
+                        'compare' => '!=',
+                    ),
+                ),
             )
         );
         ?>
