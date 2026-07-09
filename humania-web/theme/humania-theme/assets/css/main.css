@@ -1441,6 +1441,16 @@ body.single .humania-episode-box a {
     font-weight: 650;
 }
 
+.humania-revista__note {
+    max-width: 760px;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    font-weight: 650;
+}
+
 .humania-revista__content {
     max-width: 1180px;
     margin: 0 auto;

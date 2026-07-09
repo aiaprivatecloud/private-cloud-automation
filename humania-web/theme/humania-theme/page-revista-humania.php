@@ -64,14 +64,18 @@ if (!function_exists('humania_theme_news_relative_time')) {
 
 <main id="main-content" class="site-main humania-revista">
     <section class="humania-revista__hero" aria-labelledby="humania-revista-title">
-        <p class="humania-revista__eyebrow">Revista HUMANía</p>
+        <p class="humania-revista__eyebrow">Noticias</p>
 
         <h1 id="humania-revista-title" class="humania-revista__title">
-            Noticias de IA revisadas con criterio humano
+            Actualidad de IA revisada antes de publicarse
         </h1>
 
         <p class="humania-revista__intro">
-            Una selección editorial de noticias sobre inteligencia artificial. HUMANía resume, contextualiza y enlaza siempre al medio original.
+            Noticias de inteligencia artificial seleccionadas con criterio editorial. La automatización propone candidatas; HUMANía revisa, edita y publica manualmente.
+        </p>
+
+        <p class="humania-revista__note">
+            Cada noticia enlaza al medio original. Aquí no se publican borradores, descartes ni piezas pendientes de revisión.
         </p>
     </section>
 
@@ -144,7 +148,7 @@ if (!function_exists('humania_theme_news_relative_time')) {
                             <?php endif; ?>
 
                             <?php if ($original_url !== '') : ?>
-                                <a class="humania-news-card__button" href="<?php echo esc_url($original_url); ?>" rel="noopener noreferrer">
+                                <a class="humania-news-card__button" href="<?php echo esc_url($original_url); ?>" target="_blank" rel="noopener noreferrer">
                                     Leer en el medio original
                                 </a>
                             <?php endif; ?>
