@@ -32,22 +32,74 @@ function humania_ai_news_render_review_page(): void
     $options = humania_ai_news_get_options();
     $sources = array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $options['source_urls'])));
 
-    $recent_candidates = new WP_Query(
-        [
-            'post_type' => 'humania_news',
-            'post_status' => ['draft', 'pending', 'publish'],
-            'posts_per_page' => 15,
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'meta_query' => [
-                [
-                    'key' => 'humania_news_editorial_status',
-                    'value' => 'pending_review',
-                    'compare' => '=',
+    $editorial_statuses = [
+        'pending_review' => __('Pendientes', 'humania'),
+        'in_review' => __('En revisión', 'humania'),
+        'approved' => __('Aprobadas', 'humania'),
+        'discarded' => __('Descartadas', 'humania'),
+    ];
+
+    $selected_editorial_status = isset($_GET['humania_news_status'])
+        ? sanitize_key(wp_unslash($_GET['humania_news_status']))
+        : 'pending_review';
+
+    if ($selected_editorial_status !== 'all' && !array_key_exists($selected_editorial_status, $editorial_statuses)) {
+        $selected_editorial_status = 'pending_review';
+    }
+
+    $editorial_status_counts = [];
+
+    foreach ($editorial_statuses as $status_key => $status_label) {
+        $count_query = new WP_Query(
+            [
+                'post_type' => 'humania_news',
+                'post_status' => ['draft', 'pending', 'publish'],
+                'posts_per_page' => 1,
+                'fields' => 'ids',
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'meta_query' => [
+                    [
+                        'key' => 'humania_news_editorial_status',
+                        'value' => $status_key,
+                        'compare' => '=',
+                    ],
                 ],
+            ]
+        );
+
+        $editorial_status_counts[$status_key] = (int) $count_query->found_posts;
+    }
+
+    $all_editorial_status_count = array_sum($editorial_status_counts);
+
+    $review_query_args = [
+        'post_type' => 'humania_news',
+        'post_status' => ['draft', 'pending', 'publish'],
+        'posts_per_page' => 20,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ];
+
+    if ($selected_editorial_status === 'all') {
+        $review_query_args['meta_query'] = [
+            [
+                'key' => 'humania_news_editorial_status',
+                'value' => array_keys($editorial_statuses),
+                'compare' => 'IN',
             ],
-        ]
-    );
+        ];
+    } else {
+        $review_query_args['meta_query'] = [
+            [
+                'key' => 'humania_news_editorial_status',
+                'value' => $selected_editorial_status,
+                'compare' => '=',
+            ],
+        ];
+    }
+
+    $recent_candidates = new WP_Query($review_query_args);
     ?>
     <div class="wrap humania-ai-news-admin">
         <h1><?php echo esc_html__('Revisión de noticias', 'humania'); ?></h1>
@@ -210,15 +262,60 @@ function humania_ai_news_render_review_page(): void
         </div>
 
         <div class="humania-ai-news-card">
-            <h2><?php echo esc_html__('Últimas candidatas pendientes', 'humania'); ?></h2>
+            <div class="humania-ai-news-card-header">
+                <div>
+                    <h2><?php echo esc_html__('Noticias de revisión editorial', 'humania'); ?></h2>
+                    <p>
+                        <?php echo esc_html__('Gestiona candidatas importadas, noticias en revisión, aprobadas y descartadas.', 'humania'); ?>
+                    </p>
+                </div>
+            </div>
+
+            <div class="humania-ai-news-status-grid">
+                <?php foreach ($editorial_statuses as $status_key => $status_label) : ?>
+                    <?php
+                    $status_url = add_query_arg(
+                        [
+                            'page' => 'humania-ai-news-review',
+                            'humania_news_status' => $status_key,
+                        ],
+                        admin_url('admin.php')
+                    );
+
+                    $status_count = $editorial_status_counts[$status_key] ?? 0;
+                    $status_class = $selected_editorial_status === $status_key ? ' is-active' : '';
+                    ?>
+                    <a class="humania-ai-news-status-card<?php echo esc_attr($status_class); ?>" href="<?php echo esc_url($status_url); ?>">
+                        <span class="humania-ai-news-status-count"><?php echo esc_html((string) $status_count); ?></span>
+                        <span class="humania-ai-news-status-label"><?php echo esc_html($status_label); ?></span>
+                    </a>
+                <?php endforeach; ?>
+
+                <?php
+                $all_status_url = add_query_arg(
+                    [
+                        'page' => 'humania-ai-news-review',
+                        'humania_news_status' => 'all',
+                    ],
+                    admin_url('admin.php')
+                );
+
+                $all_status_class = $selected_editorial_status === 'all' ? ' is-active' : '';
+                ?>
+                <a class="humania-ai-news-status-card<?php echo esc_attr($all_status_class); ?>" href="<?php echo esc_url($all_status_url); ?>">
+                    <span class="humania-ai-news-status-count"><?php echo esc_html((string) $all_editorial_status_count); ?></span>
+                    <span class="humania-ai-news-status-label"><?php echo esc_html__('Todas', 'humania'); ?></span>
+                </a>
+            </div>
 
             <?php if ($recent_candidates->have_posts()) : ?>
-                <table class="widefat striped">
+                <table class="widefat striped humania-ai-news-review-table">
                     <thead>
                         <tr>
                             <th><?php echo esc_html__('Título', 'humania'); ?></th>
                             <th><?php echo esc_html__('Medio', 'humania'); ?></th>
                             <th><?php echo esc_html__('Idioma', 'humania'); ?></th>
+                            <th><?php echo esc_html__('Estado', 'humania'); ?></th>
                             <th><?php echo esc_html__('Fecha original', 'humania'); ?></th>
                             <th><?php echo esc_html__('Acciones', 'humania'); ?></th>
                         </tr>
@@ -228,55 +325,88 @@ function humania_ai_news_render_review_page(): void
                             <?php
                             $recent_candidates->the_post();
 
-                            $source_name = get_post_meta(get_the_ID(), 'humania_news_source_name', true);
-                            $language = get_post_meta(get_the_ID(), 'humania_news_original_language', true);
-                            $original_date = get_post_meta(get_the_ID(), 'humania_news_original_date', true);
+                            $news_id = get_the_ID();
+                            $source_name = get_post_meta($news_id, 'humania_news_source_name', true);
+                            $language = get_post_meta($news_id, 'humania_news_original_language', true);
+                            $original_date = get_post_meta($news_id, 'humania_news_original_date', true);
+                            $original_url = get_post_meta($news_id, 'humania_news_original_url', true);
+                            $editorial_status = get_post_meta($news_id, 'humania_news_editorial_status', true);
+                            $editorial_status_label = $editorial_statuses[$editorial_status] ?? __('Sin estado', 'humania');
+
+                            $review_url = wp_nonce_url(
+                                add_query_arg(
+                                    [
+                                        'humania_news_action' => 'review',
+                                        'news_id' => $news_id,
+                                    ],
+                                    admin_url('admin.php')
+                                ),
+                                'humania_news_review_' . $news_id
+                            );
+
+                            $edit_url = get_edit_post_link($news_id, '');
+
+                            $discard_url = wp_nonce_url(
+                                add_query_arg(
+                                    [
+                                        'page' => 'humania-ai-news-review',
+                                        'humania_news_action' => 'discard',
+                                        'news_id' => $news_id,
+                                    ],
+                                    admin_url('admin.php')
+                                ),
+                                'humania_news_discard_' . $news_id
+                            );
                             ?>
                             <tr>
-                                <td><?php echo esc_html(get_the_title()); ?></td>
-                                <td><?php echo esc_html((string) $source_name); ?></td>
-                                <td><?php echo esc_html((string) $language); ?></td>
-                                <td><?php echo esc_html((string) $original_date); ?></td>
-                                <td>
-                                    <?php
-                                    $review_url = wp_nonce_url(
-                                        add_query_arg(
-                                            [
-                                                'humania_news_action' => 'review',
-                                                'news_id' => get_the_ID(),
-                                            ],
-                                            admin_url('admin.php')
-                                        ),
-                                        'humania_news_review_' . get_the_ID()
-                                    );
+                                <td data-label="<?php echo esc_attr__('Título', 'humania'); ?>">
+                                    <strong><?php echo esc_html(get_the_title()); ?></strong>
+                                </td>
+                                <td data-label="<?php echo esc_attr__('Medio', 'humania'); ?>">
+                                    <?php echo esc_html((string) $source_name); ?>
+                                </td>
+                                <td data-label="<?php echo esc_attr__('Idioma', 'humania'); ?>">
+                                    <?php echo esc_html((string) $language); ?>
+                                </td>
+                                <td data-label="<?php echo esc_attr__('Estado', 'humania'); ?>">
+                                    <span class="humania-ai-news-badge humania-ai-news-badge-<?php echo esc_attr((string) $editorial_status); ?>">
+                                        <?php echo esc_html($editorial_status_label); ?>
+                                    </span>
+                                </td>
+                                <td data-label="<?php echo esc_attr__('Fecha original', 'humania'); ?>">
+                                    <?php echo esc_html((string) $original_date); ?>
+                                </td>
+                                <td data-label="<?php echo esc_attr__('Acciones', 'humania'); ?>">
+                                    <div class="humania-ai-news-actions">
+                                        <?php if ($editorial_status === 'pending_review') : ?>
+                                            <a class="button button-primary" href="<?php echo esc_url($review_url); ?>">
+                                                <?php echo esc_html__('Revisar', 'humania'); ?>
+                                            </a>
+                                        <?php elseif ($edit_url) : ?>
+                                            <a class="button" href="<?php echo esc_url($edit_url); ?>">
+                                                <?php echo esc_html__('Editar', 'humania'); ?>
+                                            </a>
+                                        <?php endif; ?>
 
-                                    $discard_url = wp_nonce_url(
-                                        add_query_arg(
-                                            [
-                                                'page' => 'humania-ai-news-review',
-                                                'humania_news_action' => 'discard',
-                                                'news_id' => get_the_ID(),
-                                            ],
-                                            admin_url('admin.php')
-                                        ),
-                                        'humania_news_discard_' . get_the_ID()
-                                    );
-                                    ?>
+                                        <?php if (!empty($original_url)) : ?>
+                                            <a class="button" href="<?php echo esc_url((string) $original_url); ?>" target="_blank" rel="noopener noreferrer">
+                                                <?php echo esc_html__('Ver original', 'humania'); ?>
+                                            </a>
+                                        <?php endif; ?>
 
-                                    <a class="button" href="<?php echo esc_url($review_url); ?>">
-                                        <?php echo esc_html__('Revisar', 'humania'); ?>
-                                    </a>
-
-                                    <a class="button button-link-delete" href="<?php echo esc_url($discard_url); ?>">
-                                        <?php echo esc_html__('Descartar', 'humania'); ?>
-                                    </a>
+                                        <?php if (in_array($editorial_status, ['pending_review', 'in_review'], true)) : ?>
+                                            <a class="button button-link-delete" href="<?php echo esc_url($discard_url); ?>">
+                                                <?php echo esc_html__('Descartar', 'humania'); ?>
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
             <?php else : ?>
-                <p><?php echo esc_html__('Todavía no hay noticias candidatas pendientes.', 'humania'); ?></p>
+                <p><?php echo esc_html__('No hay noticias en este filtro.', 'humania'); ?></p>
             <?php endif; ?>
 
             <?php wp_reset_postdata(); ?>

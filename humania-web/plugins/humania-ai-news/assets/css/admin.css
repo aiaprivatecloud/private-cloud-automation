@@ -1,11 +1,175 @@
 .humania-ai-news-admin {
-	max-width: 960px;
+        max-width: 1120px;
 }
 
 .humania-ai-news-card {
-	margin-top: 1rem;
-	padding: 1rem;
-	background: #ffffff;
-	border: 1px solid #dcdcde;
-	border-radius: 8px;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #ffffff;
+        border: 1px solid #dcdcde;
+        border-radius: 8px;
+}
+
+.humania-ai-news-card-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+}
+
+.humania-ai-news-card-header h2 {
+        margin-bottom: 0.25rem;
+}
+
+.humania-ai-news-card-header p {
+        margin-top: 0;
+        color: #646970;
+}
+
+.humania-ai-news-status-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin: 1rem 0;
+}
+
+.humania-ai-news-status-card {
+        display: block;
+        padding: 0.85rem;
+        min-height: 72px;
+        background: #f6f7f7;
+        border: 1px solid #dcdcde;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #1d2327;
+}
+
+.humania-ai-news-status-card:hover,
+.humania-ai-news-status-card:focus,
+.humania-ai-news-status-card.is-active {
+        background: #ffffff;
+        border-color: #2271b1;
+        box-shadow: 0 0 0 1px #2271b1;
+        color: #1d2327;
+}
+
+.humania-ai-news-status-count {
+        display: block;
+        font-size: 1.6rem;
+        line-height: 1;
+        font-weight: 700;
+}
+
+.humania-ai-news-status-label {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+}
+
+.humania-ai-news-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        background: #f0f0f1;
+        color: #1d2327;
+        font-size: 0.82rem;
+        font-weight: 600;
+        white-space: nowrap;
+}
+
+.humania-ai-news-badge-pending_review {
+        background: #fff8e5;
+        color: #664200;
+}
+
+.humania-ai-news-badge-in_review {
+        background: #e7f5ff;
+        color: #004b73;
+}
+
+.humania-ai-news-badge-approved {
+        background: #edfaef;
+        color: #0a5f1f;
+}
+
+.humania-ai-news-badge-discarded {
+        background: #f6f7f7;
+        color: #646970;
+}
+
+.humania-ai-news-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+}
+
+@media screen and (max-width: 782px) {
+        .humania-ai-news-admin {
+                max-width: none;
+        }
+
+        .humania-ai-news-card {
+                padding: 0.85rem;
+        }
+
+        .humania-ai-news-status-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .humania-ai-news-status-card {
+                min-height: 64px;
+        }
+
+        .humania-ai-news-review-table {
+                border: 0;
+        }
+
+        .humania-ai-news-review-table thead {
+                display: none;
+        }
+
+        .humania-ai-news-review-table,
+        .humania-ai-news-review-table tbody,
+        .humania-ai-news-review-table tr,
+        .humania-ai-news-review-table td {
+                display: block;
+                width: 100%;
+        }
+
+        .humania-ai-news-review-table tr {
+                margin-bottom: 1rem;
+                padding: 0.85rem;
+                background: #ffffff;
+                border: 1px solid #dcdcde;
+                border-radius: 8px;
+                box-sizing: border-box;
+        }
+
+        .humania-ai-news-review-table td {
+                padding: 0.45rem 0;
+                border: 0;
+        }
+
+        .humania-ai-news-review-table td::before {
+                content: attr(data-label);
+                display: block;
+                margin-bottom: 0.15rem;
+                color: #646970;
+                font-size: 0.78rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.02em;
+        }
+
+        .humania-ai-news-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+        }
+
+        .humania-ai-news-actions .button {
+                width: 100%;
+                text-align: center;
+        }
 }
