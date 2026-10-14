@@ -1,5 +1,14 @@
 # AIA Private Cloud Automation
 
+## Estado operativo actualizado — 14 de octubre de 2026
+
+La infraestructura de nube privada documentada en este repositorio ya no está desplegada. Se conserva el proyecto como referencia técnica e histórica del TFG; las descripciones de implantación y validación que siguen corresponden a aquella etapa, no a servicios actualmente en ejecución.
+
+La web editorial HUMANía continúa activa en https://aiaprendi.com/. Su tema, plugins propios, pruebas y documentación se mantienen por separado en [HUMANía Web](https://github.com/aiaprivatecloud/humania-web), repositorio privado que requiere acceso autorizado.
+
+La base inicial de la web recoge el trabajo local y sus pendientes de validación; no debe interpretarse como una copia certificada del despliegue de producción.
+
+
 Repositorio técnico del Proyecto de Fin de Ciclo de **Administración de Sistemas Informáticos en Red (ASIR)**:
 
 **Arquitectura e Implementación de una Nube Privada Segmentada para Automatización de Servicios Digitales**
